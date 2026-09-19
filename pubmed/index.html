@@ -177,6 +177,11 @@ body[data-level="lo"] .lvadd[data-lv="lo"],body[data-level="hi"] .lvadd[data-lv=
 .qa.ok{box-shadow:inset 3px 0 0 var(--accent);border-color:var(--accent)}
 .qa.no{box-shadow:inset 3px 0 0 var(--warm);opacity:.8}
 .qa.off{opacity:.45}
+/* 공통 button:hover 가 배경을 강조색으로 채워 '고른 선지'처럼 보인다(2026-09-19). 여기서만 덮는다 */
+.qa:hover{background:var(--surface2);color:var(--ink)}
+.qa.ok:hover{background:var(--surface);color:var(--ink)}
+.qa.no:hover,.qa.off:hover{background:var(--surface);color:var(--ink)}
+.qbtns button:hover{background:var(--surface2);color:var(--ink)}
 .qwhy{margin:.45rem 0 0;font-size:.85rem;color:var(--muted)}
 .qscore{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.32px;
  color:var(--muted);margin:0}
