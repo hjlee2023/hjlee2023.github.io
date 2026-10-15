@@ -1,0 +1,895 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="심리·뇌과학 서재"><meta name="build" content="d6bc40b7eaff502a"><meta name="description" content="뇌와 마음을 다룬 그 주의 논문을 PubMed 에서 골라 한국어 해설과 원문 abstract 정독으로 엮은 주간 서재."><meta property="og:type" content="website"><meta property="og:title" content="주간 심리학·뇌과학 서재"><meta property="og:description" content="뇌와 마음을 다룬 그 주의 논문을 PubMed 에서 골라 한국어 해설과 원문 abstract 정독으로 엮은 주간 서재."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f62fe'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='20' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E"><link rel="alternate" type="application/atom+xml" title="주간 심리학·뇌과학 서재" href="feed.xml"><title>주간 심리학·뇌과학 서재</title><script>try{var d=document.documentElement,t=localStorage.getItem('wl_theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(localStorage.getItem('wl_snav')==='0')d.setAttribute('data-snav','0')}catch(e){}</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#f6f8f5;--surface:#fff;--surface2:#f0f4ef;--ink:#1d2733;--muted:#66737f;
+--accent:#1f7a4d;--accent-soft:#e2eee6;--line:#dde4dd;--warm:#8a5a2b;--warm-soft:#f6eee2;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151d;--surface:#171e28;--surface2:#1c2430;
+--ink:#e6ecf2;--muted:#8b97a8;--accent:#7fd08c;--accent-soft:#1d2b26;--line:#263140;
+--warm:#d9a86a;--warm-soft:#2a2218;}}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);margin:0;line-height:1.75;font-size:16px;
+ font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Segoe UI",sans-serif;
+ overflow-wrap:anywhere;word-break:break-word;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:32px 18px 110px}
+a{color:var(--accent)}
+.eyebrow{font-size:.72rem;letter-spacing:.16em;color:var(--accent);font-weight:700;margin:0 0 .4rem}
+h1{font-size:clamp(1.45rem,5vw,1.95rem);line-height:1.32;margin:0 0 .5rem}
+h2{font-size:1.12rem;margin:0 0 .3rem;line-height:1.45}
+.sub{color:var(--muted);margin:0 0 1.5rem;font-size:.9rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:1rem}
+.top a{font-size:.85rem;text-decoration:none}
+
+/* ── 홈: 주차 아코디언 ─────────────────────────────────────────── */
+.wk{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+ margin:0 0 .8rem;overflow:hidden}
+.wkhead{display:block;width:100%;text-align:left;background:none;border:0;
+ padding:.95rem 1.1rem;font:inherit;color:inherit;cursor:pointer}
+.wkhead:hover{background:var(--surface2)}
+.wkhead b{display:block;font-size:1rem;color:var(--accent);margin-bottom:.2rem;
+ padding-right:1.4rem;position:relative}
+.wkhead b::after{content:"\25BE";position:absolute;right:0;top:0;font-size:.8rem;
+ color:var(--muted);transition:transform .15s}
+.wk.open .wkhead b::after{transform:rotate(180deg)}
+.wkhead i{font-style:normal;font-size:.84rem;color:var(--muted)}
+.wkbody{padding:0 1.1rem 1rem;border-top:1px solid var(--line)}
+.wkbody[hidden]{display:none}
+.pitem{display:flex;gap:10px;align-items:flex-start;text-decoration:none;color:var(--ink);
+ padding:.65rem .1rem;border-bottom:1px solid var(--line)}
+.pitem:last-of-type{border-bottom:0}
+.pitem:hover .pt{color:var(--accent)}
+.chk{flex:0 0 1.2rem;font-size:.9rem;color:var(--line);line-height:1.7}
+.pitem.read .chk{color:var(--accent)}
+.pitem.read .pt{color:var(--muted)}
+.pbody{min-width:0}
+.pt{display:block;font-size:.95rem;line-height:1.55}
+.pm{display:block;font-size:.76rem;color:var(--muted);margin-top:.15rem}
+.bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden;margin:.5rem 0 .3rem}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.prog{font-size:.76rem;color:var(--muted);font-style:normal}
+
+/* ── 논문 페이지 ──────────────────────────────────────────────── */
+.phead{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+ padding:.7rem .9rem;margin-bottom:1.1rem}
+.phead .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.phead a{font-size:.84rem;text-decoration:none}
+.pos{font-size:.78rem;color:var(--muted);white-space:nowrap}
+.paper{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+ padding:1.15rem 1.25rem}
+.pills{margin-bottom:.55rem;display:flex;flex-wrap:wrap;align-items:center;gap:6px 5px;line-height:1.5}
+/* 배지 줄바꿈(2026-09-13 아이폰 사고): 배지는 공백 없이 붙은 <span> 이라 줄을 바꿀 자리가 없다.
+   크롬은 경계에서 끊어 주지만 Safari 는 한 줄로 뻗어 페이지 전체가 축소됐다(BIS 논문, 배지 8개).
+   inline 줄바꿈에 기대지 말고 flex-wrap 으로 감싼다. 배지 하나가 한 줄보다 길 때만 안에서 접힌다. */
+.pill{font-size:.72rem;padding:2px 8px;border-radius:6px;background:var(--surface2);
+ color:var(--muted);white-space:normal;max-width:100%}
+.pill.hot{background:var(--accent-soft);color:var(--accent);font-weight:700}
+.pill.type{background:var(--warm-soft);color:var(--warm)}
+.meta{font-size:.78rem;color:var(--muted);margin:.15rem 0 0}
+.meta a{color:var(--muted)}
+.sec{font-size:.7rem;letter-spacing:.12em;color:var(--muted);margin:1.3rem 0 .5rem;
+ border-top:1px solid var(--line);padding-top:.85rem}
+.one{font-size:1.02rem;margin:0;font-weight:600}
+.body p{margin:.5rem 0}
+.flow{display:flex;gap:8px;margin:.2rem 0 0;flex-wrap:wrap}
+.flow>div{flex:1 1 30%;min-width:0;background:var(--surface2);border-radius:8px;padding:.55rem .7rem}
+.flow>div.now{background:var(--accent-soft)}
+.flow h4{margin:0 0 .15rem;font-size:.7rem;color:var(--muted);font-weight:700;letter-spacing:.06em}
+.flow>div.now h4{color:var(--accent)}
+.flow p{margin:0;font-size:.86rem;line-height:1.6}
+.abs h3{font-size:.74rem;letter-spacing:.1em;color:var(--warm);margin:1rem 0 .35rem;font-weight:700}
+.en{font-size:.95rem;line-height:1.7;margin:0 0 2px;cursor:pointer;padding:1px 0}
+.en:hover{color:var(--accent)}
+.ko{font-size:.87rem;color:var(--muted);margin:0 0 .55rem;padding-left:10px;
+ border-left:2px solid var(--accent-soft)}
+.ko[hidden]{display:none}
+.tools{display:flex;gap:8px;margin:.8rem 0 0;flex-wrap:wrap}
+button{background:var(--surface2);color:var(--ink);border:1px solid var(--line);
+ border-radius:8px;padding:.4rem .8rem;font:inherit;font-size:.82rem;cursor:pointer}
+button:hover{border-color:var(--accent)}
+.ph{background:var(--surface2);border-radius:8px;padding:.6rem .8rem;margin:0 0 .5rem}
+.ph b{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9rem;
+ color:var(--warm);font-weight:600}
+.ph i{font-style:normal;font-size:.86rem;color:var(--ink);display:block;margin:.1rem 0}
+.ph small{color:var(--muted);font-size:.8rem;line-height:1.6;display:block}
+.pnav{display:flex;gap:8px;margin-top:1.1rem}
+.pnav a{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:10px;
+ padding:.7rem .85rem;text-decoration:none;color:var(--ink);font-size:.84rem;min-width:0}
+.pnav a:hover{border-color:var(--accent)}
+.pnav a span{display:block;font-size:.72rem;color:var(--muted);margin-bottom:.15rem}
+.pnav a.next{text-align:right}
+.foot{margin-top:2.2rem;font-size:.76rem;color:var(--muted);line-height:1.7}
+.foot a{color:var(--muted)}
+.classic{font-size:.85rem;color:var(--muted);margin:.3rem 0}
+
+/* ═══ 스킨: IBM Carbon v11 토큰(dtcg/white·g100) × 함렛 — 2026-09-13 사용자 선택 ═══ */
+:root{--bg:#ffffff;--surface:#ffffff;--surface2:#f4f4f4;--ink:#161616;--muted:#525252;--accent:#0f62fe;
+ --accent-soft:#edf5ff;--line:#e0e0e0;--warm:#0043ce;--warm-soft:#f4f4f4;--on-accent:#ffffff}
+/* 어두운 화면: 사용자가 고른 후보 A(차콜 회색 + 파랑, 2026-10-11). 기기 설정이 어두우면 따라가고,
+   화면 밝기 토글로 '밝게'·'어둡게'를 고르면(html[data-theme]) 기기 설정보다 그 선택이 앞선다. */
+:root{color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161616;--surface:#161616;--surface2:#262626;--ink:#f4f4f4;--muted:#c6c6c6;--accent:#78a9ff;--accent-soft:#1f2b40;--line:#393939;--warm:#a6c8ff;--warm-soft:#262626;--on-accent:#161616;--danger:#ff8389;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#161616;--surface:#161616;--surface2:#262626;--ink:#f4f4f4;--muted:#c6c6c6;--accent:#78a9ff;--accent-soft:#1f2b40;--line:#393939;--warm:#a6c8ff;--warm-soft:#262626;--on-accent:#161616;--danger:#ff8389;color-scheme:dark}
+*{border-radius:0!important}
+body{font-family:"Hahmlet",Georgia,serif;
+ font-size:16px;line-height:1.65;word-break:keep-all}
+.eyebrow,.pill,.sec,.pos,.prog,.pm,.flow h4{font-family:"IBM Plex Mono","Hahmlet",monospace}
+.eyebrow{letter-spacing:.32px;font-weight:400;color:var(--muted);font-size:.75rem}
+h1{font-weight:400;font-size:2rem;line-height:1.25}
+h2{font-weight:400;font-size:1.5rem;line-height:1.3}
+.wk{border:1px solid var(--line);background:var(--surface);margin:0 0 -1px}
+.wkhead:hover{background:var(--surface2)}
+.wk.open .wkhead{box-shadow:inset 3px 0 0 var(--accent)}
+.wkhead b{color:var(--ink);font-weight:600}
+.pitem{padding:.8rem .1rem}
+.bar{height:2px}
+.phead{background:var(--surface2);border:0;padding:.75rem 1rem}
+.paper{border:1px solid var(--line);padding:1.25rem 1rem}
+.pill{background:var(--line);color:var(--ink);font-size:.72rem;letter-spacing:.32px;padding:2px 8px}
+.pill.hot{background:var(--accent);color:var(--on-accent);font-weight:400}
+.pill.type{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
+.meta{font-size:.875rem;letter-spacing:.16px}
+.sec{font-size:.75rem;letter-spacing:.32px;color:var(--muted)}
+.one{font-weight:400;font-size:1.22rem;line-height:1.45}
+.flow{gap:1px;background:var(--line);border:1px solid var(--line)}
+.flow>div{background:var(--surface)}
+.flow>div.now{background:var(--accent-soft);box-shadow:inset 0 3px 0 var(--accent)}
+.ko{border-left:3px solid var(--line);color:var(--muted)}
+button{background:transparent;border:1px solid var(--accent);color:var(--accent);font-size:.875rem;
+ letter-spacing:.16px;padding:.5rem 1rem}
+button:hover{background:var(--accent);color:var(--on-accent)}
+.ph{background:var(--surface2);box-shadow:inset 3px 0 0 var(--accent);padding:.75rem 1rem}
+.ph b{font-family:"IBM Plex Mono",monospace;color:var(--warm);font-weight:400;letter-spacing:.32px;font-size:.875rem}
+.pnav a{border:1px solid var(--line);background:var(--surface)}
+.pnav a:hover{background:var(--surface2);border-color:var(--line)}
+.foot{border-top:1px solid var(--line);padding-top:1rem}
+
+/* ── 읽기 수준 상·중·하 (2026-09-18) ─────────────────────────── */
+.lv,.lvadd{display:none}
+body[data-level="lo"] .lv[data-lv="lo"],body[data-level="mid"] .lv[data-lv="mid"],
+body[data-level="hi"] .lv[data-lv="hi"]{display:block}
+body[data-level="lo"] .lvadd[data-lv="lo"],body[data-level="mid"] .lvadd[data-lv="mid"],
+body[data-level="hi"] .lvadd[data-lv="hi"]{display:block}
+[hidden]{display:none!important}
+.lvbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:.7rem 0 0}
+.lvlab{font-family:"IBM Plex Mono","Hahmlet",monospace;font-size:.68rem;letter-spacing:.32px;
+ color:var(--muted)}
+.lvseg{display:inline-flex;border:1px solid var(--line)}
+.lvseg button{border:0;border-right:1px solid var(--line);background:transparent;color:var(--muted);
+ font-family:inherit;font-size:.8rem;padding:.24rem .8rem;cursor:pointer}
+.lvseg button:last-child{border-right:0}
+.lvseg button.on{background:var(--accent);color:var(--on-accent)}
+.lvquiz{border:0;background:transparent;color:var(--accent);font-family:inherit;font-size:.74rem;
+ cursor:pointer;text-decoration:underline;padding:.24rem 0}
+.lvadd{margin:.4rem 0 .9rem;padding:.6rem .85rem;background:var(--surface2);
+ box-shadow:inset 3px 0 0 var(--warm);font-size:.92rem}
+.ovl{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);display:flex;
+ justify-content:center;align-items:flex-start;overflow:auto;padding:22px 12px}
+.ovlbox{background:var(--bg);border:1px solid var(--line);max-width:640px;width:100%;
+ padding:22px 18px 24px;position:relative}
+.ovlx{position:absolute;top:6px;right:6px;border:0;background:transparent;color:var(--muted);
+ font-family:inherit;font-size:1.5rem;line-height:1;width:44px;height:44px;cursor:pointer}
+.ovlx:hover{color:var(--ink)}
+.ovlbox h2{margin:.2rem 0 .5rem}
+.qz{border-top:1px solid var(--line);padding-top:.9rem;margin:0 0 1rem}
+.qq{margin:0 0 .55rem;font-size:.97rem}
+.qa{display:block;width:100%;text-align:left;margin:0 0 .35rem;border:1px solid var(--line);
+ background:var(--surface);color:var(--ink);font-family:inherit;font-size:.9rem;
+ padding:.5rem .75rem;cursor:pointer;line-height:1.5}
+.qa.ok{box-shadow:inset 3px 0 0 var(--accent);border-color:var(--accent)}
+.qa.no{box-shadow:inset 3px 0 0 var(--warm);opacity:.8}
+.qa.off{opacity:.45}
+/* 공통 button:hover 가 배경을 강조색으로 채워 '고른 선지'처럼 보인다(2026-09-19). 여기서만 덮는다 */
+.qa:hover{background:var(--surface2);color:var(--ink)}
+.qa.ok:hover{background:var(--surface);color:var(--ink)}
+.qa.no:hover,.qa.off:hover{background:var(--surface);color:var(--ink)}
+.qbtns button:hover{background:var(--surface2);color:var(--ink)}
+.qwhy{margin:.45rem 0 0;font-size:.85rem;color:var(--muted)}
+.qscore{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.32px;
+ color:var(--muted);margin:0}
+.qrec{margin:.2rem 0 .9rem;font-size:1.02rem}
+.qpick{margin:0 0 .5rem;font-size:.85rem;color:var(--muted)}
+.qbtns{display:flex;gap:8px;margin:0 0 .4rem}
+.qbtns button{flex:1;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+ font-family:inherit;font-size:1rem;padding:.6rem;cursor:pointer}
+.reclab{display:block;font-family:"IBM Plex Mono",monospace;font-size:.58rem;letter-spacing:.32px;
+ color:var(--accent);margin-top:.2rem}
+
+/* ── 2026-10-08 보강: 정정 공고·참고 자료·검색·진도 백업·접근성 ── */
+:root{--danger:#da1e28}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.chk{color:var(--muted)}
+.en:focus-visible,.pitem:focus-visible,.wkhead:focus-visible,.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+html.modal{overflow:hidden}
+.lvlab{font-size:.75rem}
+.lvquiz{font-size:.8rem}
+.reclab{font-size:.68rem}
+.notice{margin:.9rem 0 0;padding:.75rem 1rem;background:var(--surface2);box-shadow:inset 3px 0 0 var(--warm);font-size:.9rem}
+.notice.bad{box-shadow:inset 3px 0 0 var(--danger)}
+.notice p{margin:.2rem 0}
+.notice b{font-weight:600}
+.notice.bad b{color:var(--danger)}
+.srcs{margin:.3rem 0 0;padding-left:1.3rem;font-size:.85rem;color:var(--muted)}
+.srcs li{margin:.3rem 0}
+.srcs a{color:var(--muted)}
+.tools.top{margin:0 0 .4rem}
+.search{margin:1rem 0 .9rem}
+.search input{width:100%;font:inherit;font-size:.95rem;padding:.55rem .75rem;border:1px solid var(--line);
+ background:var(--surface);color:var(--ink)}
+.search input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.qcount{font-family:"IBM Plex Mono","Hahmlet",monospace;font-size:.75rem;color:var(--muted);margin:.6rem 0 .2rem}
+.lnk{border:0;background:transparent;color:var(--muted);text-decoration:underline;font-family:inherit;
+ font-size:.76rem;padding:0;cursor:pointer;letter-spacing:0}
+.lnk:hover{background:transparent;color:var(--ink)}
+.bk{margin:.6rem 0 0;padding:.75rem 1rem;background:var(--surface2);font-size:.82rem;color:var(--ink)}
+.bk textarea,.bk input{width:100%;font-family:"IBM Plex Mono",monospace;font-size:.75rem;padding:.45rem .6rem;
+ border:1px solid var(--line);background:var(--surface);color:var(--ink);margin:.25rem 0 .45rem}
+.bk p{margin:.2rem 0}
+.bk .tools{margin:.2rem 0 .5rem}
+.wkhead .bar{display:block}
+/* ── 2026-10-11 화면 기능(사용자 선택): 목록 패널·아래 막대·구역 이동·이어 읽기 ──
+   가로 화면(960px 이상)은 왼쪽에 주차·논문 목록이 늘 보이고, 1280px 이상은 오른쪽에 지금 읽는 구역이 뜬다.
+   세로 화면은 아래 막대(이전·목록·번역·다음)와 아래에서 올라오는 목록 판, 내려 읽으면 위에 뜨는 구역 칩을 쓴다.
+   목록은 한 번 만들어 두 화면이 같이 쓴다(.snav 가 가로에선 옆 패널, 세로에선 판). */
+.snav{position:fixed;z-index:30;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.snhead{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:1rem 1rem .5rem}
+.snhead a{font-size:.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+.snx{display:none;border:0;background:transparent;color:var(--muted);font-family:inherit;font-size:1.5rem;
+ line-height:1;width:44px;height:44px;padding:0;cursor:pointer}
+.snx:hover{background:transparent;color:var(--ink)}
+.snq{margin:0 1rem .7rem}
+.snq input{width:100%;font:inherit;font-size:.85rem;padding:.42rem .6rem;border:1px solid var(--line);
+ background:var(--surface);color:var(--ink)}
+.snq input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.snw{border-top:1px solid var(--line)}
+/* 아이콘 단추(설정·목록 접기/펴기)와 설정 창 — 2026-10-11 */
+.ib{border:0;background:transparent;color:var(--muted);padding:0;width:40px;height:40px;display:inline-flex;
+ align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}
+.ib:hover{background:var(--surface2);color:var(--ink)}
+.ib:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.ib svg{width:20px;height:20px;display:block}
+.snbtns{display:flex;align-items:center;margin-right:-8px}
+.snrail{display:none}
+.hgear{margin-left:-10px}
+#bbar .bbgear{flex:0 0 52px;display:flex;align-items:center;justify-content:center;height:auto;color:var(--muted)}
+#settings .ovlbox{max-width:520px}
+.setrow{border-top:1px solid var(--line);padding:1rem 0 .3rem}
+.setrow h3{font-family:"IBM Plex Mono","Hahmlet",monospace;font-size:.75rem;letter-spacing:.32px;color:var(--muted);
+ font-weight:400;margin:0 0 .65rem}
+.setline{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sethelp{font-size:.8rem;color:var(--muted);margin:.55rem 0 .5rem}
+#settings .bk{margin:0;padding:0;background:transparent}
+.snwh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;width:100%;border:0;background:transparent;
+ color:var(--ink);font-family:inherit;font-size:.88rem;font-weight:600;letter-spacing:0;padding:.62rem 1rem;
+ text-align:left;cursor:pointer}
+.snwh:hover{background:var(--surface2);color:var(--ink)}
+.snwh i{font-style:normal;font-family:"IBM Plex Mono","Hahmlet",monospace;font-size:.7rem;color:var(--muted);font-weight:400}
+.snw ul{list-style:none;margin:0;padding:0 0 .45rem}
+.snw[data-open="0"] ul{display:none}
+.snp{display:flex;gap:8px;padding:.42rem 1rem;font-size:.84rem;line-height:1.45;color:var(--ink);text-decoration:none}
+.snp:hover{background:var(--surface2)}
+.snp:focus-visible,.snwh:focus-visible,#secnav button:focus-visible,#bbar a:focus-visible,#bbar button:focus-visible,
+.resume:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.snp .d{flex:0 0 .9rem;color:var(--muted);font-size:.66rem;line-height:1.95}
+.snp.read .d{color:var(--accent)}
+.snp.read .t{color:var(--muted)}
+.snp .t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-width:0}
+.snp[aria-current="page"]{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+#snback{position:fixed;inset:0;z-index:29;background:rgba(0,0,0,.45)}
+#secnav{position:fixed;z-index:20;display:flex}
+#secnav button{border:0;background:transparent;color:var(--muted);font-family:"IBM Plex Mono","Hahmlet",monospace;
+ font-size:.72rem;letter-spacing:.2px;padding:.4rem .45rem;cursor:pointer;white-space:nowrap}
+#secnav button:hover{background:transparent;color:var(--ink)}
+#secnav button.on{color:var(--accent)}
+.paper .sec{scroll-margin-top:56px}
+#bbar{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;background:var(--bg);
+ border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+#bbar a,#bbar button{flex:1 1 0;min-width:0;border:0;background:transparent;color:var(--ink);font-family:inherit;
+ font-size:.84rem;letter-spacing:0;padding:.8rem .2rem;text-align:center;text-decoration:none;cursor:pointer}
+#bbar button:hover{background:transparent;color:var(--ink)}
+#bbar a[aria-disabled="true"]{color:var(--line);pointer-events:none}
+.resume{display:block;margin:.2rem 0 1rem;padding:.7rem 1rem;background:var(--surface2);
+ box-shadow:inset 3px 0 0 var(--accent);text-decoration:none;color:var(--ink);font-size:.92rem;line-height:1.5}
+.resume span{display:block;font-family:"IBM Plex Mono","Hahmlet",monospace;font-size:.7rem;letter-spacing:.32px;
+ color:var(--muted);margin-bottom:.15rem}
+.resume:hover{background:var(--accent-soft)}
+@media (min-width:960px){
+ body{padding-left:260px}
+ .snav{left:0;top:0;bottom:0;width:260px;border-right:1px solid var(--line)}
+ #snback,#bbar{display:none!important}
+ .hgear{visibility:hidden}
+ /* 목록 패널을 접으면 좁은 줄(목록 펴기·설정)만 남는다. 접힘은 기기에 기억한다(html[data-snav="0"]) */
+ html[data-snav="0"] body{padding-left:48px}
+ html[data-snav="0"] .snav{display:none}
+ html[data-snav="0"] .snrail{display:flex;flex-direction:column;align-items:center;gap:2px;position:fixed;z-index:30;
+  left:0;top:0;bottom:0;width:48px;padding-top:.7rem;border-right:1px solid var(--line);background:var(--bg)}
+}
+@media (max-width:959px){
+ .snav{left:0;right:0;bottom:0;max-height:78vh;border-top:1px solid var(--line);transform:translateY(105%);
+  visibility:hidden;transition:transform .18s,visibility .18s;padding-bottom:env(safe-area-inset-bottom)}
+ body.snopen .snav{transform:none;visibility:visible}
+ .snx{display:block}
+ .sncol{display:none}
+}
+@media (min-width:1280px){
+ body{padding-right:200px}
+ #secnav{right:0;top:132px;width:200px;flex-direction:column;align-items:flex-start;padding:0 1rem 0 .6rem}
+ #secnav button{font-size:.78rem;padding:.36rem .8rem;box-shadow:inset 2px 0 0 var(--line)}
+ #secnav button.on{box-shadow:inset 2px 0 0 var(--accent)}
+ #secnav .s{display:none}
+}
+@media (max-width:1279px){
+ #secnav{top:0;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);padding:.15rem .5rem;
+  justify-content:space-between;transform:translateY(-110%);transition:transform .15s}
+ body.scrolled #secnav{transform:none}
+ #secnav .l{display:none}
+}
+@media (min-width:960px) and (max-width:1279px){#secnav{left:260px;justify-content:flex-start;gap:.4rem;padding-left:1rem}
+ html[data-snav="0"] #secnav{left:48px}}
+/* ── 2026-10-11 주차 소개글: 사용자가 사설 서재에서 직접 쓴다. 화면은 읽어서 보여 주기만 한다 ── */
+.wkintro{margin:.9rem 0 .5rem}
+.wkintro[hidden]{display:none}
+.wkintro .intro{font-size:.92rem;color:var(--ink);line-height:1.8;margin:0 0 .45rem;white-space:pre-line}
+.introta{display:block;width:100%;font:inherit;font-size:.92rem;line-height:1.7;padding:.6rem .75rem;
+ border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+.introta:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.wkintro .tools{margin:.5rem 0 0;align-items:center}
+.intromsg{font-size:.76rem;color:var(--muted)}
+p.intromsg{margin:.3rem 0 0}
+</style></head><body data-wbase="w/"><div class="wrap"><section class="view" id="v-home" hidden><div class="top"><button type="button" class="ib hgear" data-settings="1" aria-label="설정"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button><a href="../">서재 목록 →</a></div><p class="eyebrow">PSYCH & BRAIN WEEKLY</p><h1>주간 심리학·뇌과학 서재</h1><p class="sub">주차를 누르면 그 주 논문 목록이 열리고, 논문을 누르면 각각 따로 열립니다.</p><a class="resume" id="resume" hidden></a><div class="search"><input type="search" id="q" placeholder="지난 논문 찾기: 제목, 저널, 주제" aria-label="지난 논문 찾기" autocomplete="off"><div id="qres" hidden></div></div><article class="wk" data-week="2026-W42" data-wk="2026-W42"><button class="wkhead" aria-expanded="false"><b>10월 3주</b><i>2026-10-12 ~ 2026-10-18 · 논문 5편</i><span class="bar"><i></i></span><i class="prog"></i></button><div class="wkbody" hidden><div class="wkintro" data-intro="2026-W42" hidden></div><a class="pitem" data-pmid="42862582" href="#2026-W42/42862582"><span class="chk" aria-hidden="true">○</span><span class="vh">안 읽음</span><span class="pbody"><span class="pt">전 세계 모든 원인 치매의 발생률: 메타분석</span><span class="pm">JAMA Neurol · 트렌딩 #41 · 인기</span></span></a><a class="pitem" data-pmid="42862569" href="#2026-W42/42862569"><span class="chk" aria-hidden="true">○</span><span class="vh">안 읽음</span><span class="pbody"><span class="pt">미국 청소년의 불안 증상 추정치</span><span class="pm">JAMA Pediatr · 트렌딩 #39 · 인기</span></span></a><a class="pitem" data-pmid="42869027" href="#2026-W42/42869027"><span class="chk" aria-hidden="true">○</span><span class="vh">안 읽음</span><span class="pbody"><span class="pt">종 간 AAV 플랫폼으로 미세아교세포를 정밀하게 겨냥하기</span><span class="pm">Neuron · 트렌딩 #46 · 인기</span></span></a><a class="pitem" data-pmid="42864430" href="#2026-W42/42864430"><span class="chk" aria-hidden="true">○</span><span class="vh">안 읽음</span><span class="pbody"><span class="pt">LLM이 시뮬레이션한 응답은 74개국 사람들의 경제적 선호를 약하게만 대신한다</span><span class="pm">Nat Hum Behav · 신착 · 고티어 저널</span></span></a><a class="pitem" data-pmid="42869023" href="#2026-W42/42869023"><span class="chk" aria-hidden="true">○</span><span class="vh">안 읽음</span><span class="pbody"><span class="pt">자연스러운 능숙한 비행 중 박쥐 운동피질의 고차원 집단 부호</span><span class="pm">Cell · 신착 · 고티어 저널</span></span></a></div></article><p class="foot">심리학, 신경과학, 정신의학, 신경과 논문을 싣는다. PubMed 트렌딩 상위 500편에서 뇌와 마음을 다룬 논문을 골라 저널·논문유형·최신성을 가중해 매기고, 신경·심리 저널과 종합지의 그 주 신착, 트렌딩에 다시 오른 3년 이상 된 논문을 따로 더한다. 트렌딩은 NCBI 가 최근 활동이 늘어난 논문이라고만 밝히고 산식은 공개하지 않아, 많이 읽혔다는 뜻으로 단정할 수 없다. 주간 PubMed 서재와 겹치는 뇌·마음 논문은 이 서재에 싣는다. 각 논문 abstract 의 저작권은 해당 출판사·저자에게 있습니다. 이 페이지는 학습 목적의 인용과 한국어 해설이며, 원문은 각 논문의 PubMed 링크에서 보실 수 있습니다. 게재를 원치 않는 권리자는 <a href="https://github.com/hjlee2023/hjlee2023.github.io/issues" rel="noopener">Issues</a> 로 알려주시면 해당 항목을 내립니다.</p></section><section class="view" id="v-load" hidden><p class="sub" id="vload-msg" role="status">불러오는 중…</p><div class="tools"><button type="button" data-retry="1" hidden>다시 시도</button></div><p class="sub"><a href="#">← 목록으로</a></p></section></div><nav class="snav" id="snav" aria-label="주차와 논문 목록"><div class="snhead"><a href="#home">주간 심리학·뇌과학 서재</a><span class="snbtns"><button type="button" class="ib" data-settings="1" aria-label="설정"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button><button type="button" class="ib sncol" data-sncollapse="1" aria-label="목록 접기"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 6l-6 6 6 6M19 6l-6 6 6 6"/></svg></button><button type="button" class="snx" data-snclose="1" aria-label="목록 닫기">&times;</button></span></div><div class="snq"><input type="search" id="snq" placeholder="논문 찾기" aria-label="목록에서 논문 찾기" autocomplete="off"></div><div id="snlist"></div></nav><div class="snrail" id="snrail"><button type="button" class="ib" data-snexpand="1" aria-label="목록 펴기"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><button type="button" class="ib" data-settings="1" aria-label="설정"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button></div><div id="snback" data-snclose="1" hidden></div><div id="secnav" role="navigation" aria-label="이 논문의 구역" hidden></div><div id="bbar" role="navigation" aria-label="논문 이동" hidden><a id="bbprev" aria-disabled="true">&larr; 이전</a><button type="button" data-snopen="1">목록</button><button type="button" id="bbtr" data-bbtr="1">번역 열기</button><a id="bbnext" aria-disabled="true">다음 &rarr;</a><button type="button" class="ib bbgear" data-settings="1" aria-label="설정"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button></div><div class="ovl" id="lvtest" hidden><div class="ovlbox" role="dialog" aria-modal="true" aria-labelledby="lvtitle"><button type="button" class="ovlx" data-quizclose="1" aria-label="닫기">×</button><p class="eyebrow">LEVEL CHECK</p><h2 id="lvtitle">어느 수준으로 읽으시겠어요?</h2><p class="sub">여섯 문항입니다. 맞힌 개수로 수준을 추천해 드리고, 실제로 읽을 수준은 직접 고르시면 됩니다. 설정(톱니바퀴)이나 논문 화면 위쪽에서 언제든 바꿀 수 있습니다.</p><div id="lvq"></div><div id="lvres" hidden></div></div></div><div class="ovl" id="settings" hidden><div class="ovlbox" role="dialog" aria-modal="true" aria-labelledby="set-h"><button type="button" class="ovlx" data-setclose="1" aria-label="설정 닫기">&times;</button><h2 id="set-h">설정</h2><div class="setrow"><h3>읽기 수준</h3><div class="setline"><span class="lvseg" role="group" aria-label="읽기 수준"><button type="button" data-setlv="lo">하</button><button type="button" data-setlv="mid">중</button><button type="button" data-setlv="hi">상</button></span><button type="button" class="lvquiz" data-quiz="1">수준 테스트</button></div><p class="sethelp">해설의 깊이를 고릅니다. 논문 화면 위쪽에서도 바꿀 수 있습니다.</p></div><div class="setrow"><h3>화면 밝기</h3><div class="setline"><span class="lvseg thseg" role="group" aria-label="화면 밝기"><button type="button" data-theme-set="auto">자동</button><button type="button" data-theme-set="light">밝게</button><button type="button" data-theme-set="dark">어둡게</button></span></div><p class="sethelp">자동은 기기 설정을 따릅니다.</p></div><div class="setrow"><h3>읽음 기록 백업·복원</h3><div class="bk" id="bk"><p>읽음 기록과 읽기 수준은 이 기기의 브라우저에만 저장됩니다. 브라우저 기록을 지우거나, iPhone Safari 처럼 한동안 열지 않은 사이트의 저장소를 지우는 브라우저에서는 사라질 수 있습니다. 아래 코드를 보관해 두면 다른 기기나 나중에 되살릴 수 있습니다.</p><textarea id="bkout" rows="3" readonly aria-label="백업 코드"></textarea><div class="tools"><button type="button" data-bkcopy="1">코드 복사</button></div><input id="bkin" placeholder="보관한 코드를 붙여 넣으세요" aria-label="복원할 코드"><div class="tools"><button type="button" data-bkrestore="1">복원</button></div><p id="bkmsg" role="status"></p></div></div></div></div><script>
+(function(){
+ var K='mw_read';
+ var LK='mw_level';              // 읽기 수준 — 서재마다 따로 기억한다(두 공개 사이트가 같은 origin)
+ var QUIZ={"mid": 3, "hi": 5, "say": {"lo": "용어를 그때그때 풀어 주고 영어 표현도 기초부터 짚는 판으로 읽으시면 편합니다. 익숙해지면 언제든 올리실 수 있습니다.", "mid": "용어를 적당히 풀어 주면서 논문의 쟁점까지 다루는 기본 판이 잘 맞습니다.", "hi": "연구 설계와 해석의 쟁점까지 파고드는 판을 권합니다. 쉬운 설명은 빼고 그만큼 다른 내용을 채웁니다."}, "q": [{"q": "한 신경세포가 다음 신경세포에 신호를 넘겨주는 접합 부위는?", "a": ["축삭 둔덕", "시냅스", "랑비에 결절"], "c": 1, "why": "시냅스입니다. 앞 세포가 신경전달물질을 내보내면 뒤 세포의 수용체가 받습니다. 축삭 둔덕은 활동전위가 시작되는 곳이고, 랑비에 결절은 말이집 사이의 틈으로 신호가 건너뛰듯 빨리 전달되게 합니다."}, {"q": "새로운 사건 기억을 만드는 데 핵심인, 측두엽 안쪽의 구조는?", "a": ["해마", "편도체", "소뇌"], "c": 0, "why": "해마입니다. 양쪽 해마를 잃은 환자 H.M.이 새 기억을 만들지 못한 사례로 알려졌습니다. 편도체는 공포 같은 정서 처리에, 소뇌는 운동 조절과 운동 학습에 관여합니다."}, {"q": "참가자도 평가하는 연구자도 누가 어느 집단에 배정됐는지 모르게 하는 설계는?", "a": ["교차 설계", "단일맹검", "이중맹검"], "c": 2, "why": "이중맹검입니다. 단일맹검은 참가자만 모르는 경우이고, 교차 설계는 같은 사람이 시기를 달리해 두 조건을 모두 받는 방식입니다. 기대가 결과에 섞이는 것을 막으려는 장치입니다."}, {"q": "앞선 연구와 같은 절차를 새 표본에 되풀이해 같은 결과가 나오는지 보는 연구는?", "a": ["메타분석", "재현 연구", "종단 연구"], "c": 1, "why": "재현 연구입니다. 2015년 심리학 연구 100편을 다시 해 본 대규모 재현 시도에서 원래만큼 뚜렷한 결과가 나온 것이 절반에 못 미쳐 '재현성 위기'라는 말이 퍼졌습니다. 메타분석은 여러 연구 결과를 통계로 합치는 것이고, 종단 연구는 같은 사람을 오래 따라가는 설계입니다."}, {"q": "자기가 이미 믿는 것을 지지하는 정보만 골라 받아들이는 경향은?", "a": ["후광 효과", "기저율 무시", "확증 편향"], "c": 2, "why": "확증 편향입니다. 후광 효과는 한 가지 좋은 인상이 다른 평가까지 끌어올리는 것이고, 기저율 무시는 판단할 때 전체 집단의 비율 정보를 빼먹는 오류입니다."}, {"q": "뇌의 어느 부위가 활발한지를 혈액 속 산소 농도 변화로 추정하는 영상법은?", "a": ["EEG", "fMRI", "MEG"], "c": 1, "why": "fMRI(기능적 자기공명영상)입니다. 활동이 늘어난 부위로 산소가 많은 혈액이 몰리는 변화를 잡습니다. EEG와 MEG는 신경세포의 전기 활동이 만드는 전기장과 자기장을 직접 재서, 시간은 정밀하지만 위치는 덜 정확합니다."}]};               // 첫 방문 수준 테스트 문항(quiz.json)
+ var IDX=[{"id":"42862582","w":"2026-W42","s":"10월 3주","t":"전 세계 모든 원인 치매의 발생률: 메타분석","e":"Global Incidence of All-Cause Dementia: A Meta-Analysis.","j":"JAMA Neurol","k":"치매 · 전 세계 발생률","o":"18개 국가·지역 22개 코호트의 38,418명(치매 3001명 발생)을 개인 자료 수준에서 합쳐 전 세계 치매 발생률을 위험 인년 1000당 9.7로 추정했고, 여성과 저·중소득 국가에서 더 높았으며(10.6 대 8.6, 13.6 대 8.3) 발생률이 일정하다는 가정에서 2050년 새 환자는 2470만 명으로 예상했다. 18개 국가·지역 22개 코호트의 38,418명(치매 3001명 발생)을 개인 참가자 수준 2단계 메타분석으로 합쳐 2023년 세계 인구 구조로 표준화한 치매 발생률을 위험 인년 1000당 9.7로 추정했고, 여성과 저·중소득 국가에서 더 높았으며(10.6 대 8.6, 13.6 대 8.3) 발생률이 일정하다는 가정에서 2050년 새 환자는 2470만 명으로 예상했다."},{"id":"42862569","w":"2026-W42","s":"10월 3주","t":"미국 청소년의 불안 증상 추정치","e":"Estimates of Anxiety Symptoms Among US Adolescents.","j":"JAMA Pediatr","k":"청소년 불안 · 전국 대표 조사","o":"2024년 전국 조사의 12~20세 청소년 15,730명 가운데 약 6명 중 1명이 중등도 이상 불안 증상(GAD-7)을 보고했고(중등도 9.6%, 중증 7.2%), 중증이면 65.8%가 주요우울삽화 기준을 충족하고 48.2%가 자살 생각을 보고했는데도 중증의 41.2%는 지난 1년간 치료를 받지 못했다. 2024년 NSDUH의 12~20세 15,730명에서 GAD-7로 잰 중등도 이상 불안 증상이 약 6명 중 1명(중등도 9.6%, 중증 7.2%)이었고 중증군의 65.8%가 지난 1년간 주요우울삽화 기준을 충족하고 48.2%가 자살 생각을 보고했는데도 중증군의 41.2%는 치료를 받지 못했다."},{"id":"42869027","w":"2026-W42","s":"10월 3주","t":"종 간 AAV 플랫폼으로 미세아교세포를 정밀하게 겨냥하기","e":"A cross-species AAV platform for precise microglial interrogation.","j":"Neuron","k":"미세아교세포 · AAV 유전자 전달 도구","o":"446-bp 미세아교세포 특이 조절 요소와 AAV2/9.m 캡시드, 신경세포 표적 회피, 코돈 최적화를 결합한 AAV 플랫폼이 생쥐 여러 뇌 영역에서 90% 넘는 미세아교세포 특이성을 달성했고, 독소루비신을 쓰면 쥐, 붉은털원숭이, 사람 뇌 절편에서도 미세아교세포를 선택적으로 겨냥했다. 446-bp MSRE와 AAV2/9.m 캡시드, microRNA 매개 신경세포 표적 회피, 미세아교세포에 맞춘 코돈 최적화를 결합한 Cre 비의존 AAV 플랫폼이 생쥐 여러 뇌 영역에서 90% 넘는 미세아교세포 특이성을 달성했고, 독소루비신 보조 투여로 쥐, 붉은털원숭이, 사람 뇌 절편에서도 선택적 표적화를 보였다."},{"id":"42864430","w":"2026-W42","s":"10월 3주","t":"LLM이 시뮬레이션한 응답은 74개국 사람들의 경제적 선호를 약하게만 대신한다","e":"Simulated responses from large language models are weak proxies for human economic preferences across 74 countries.","j":"Nat Hum Behav","k":"LLM 가상 응답자 · 경제적 선호 설문","o":"74개국 67,201명의 설문을 LLM 20개 구성으로 가상 재현한 결과, 개인 수준에서는 체계적이지만 보통 수준으로 일치했고(스피어먼 상관의 87.5%가 신뢰구간 0 초과) 성별·연령·인지능력의 연관 방향은 77.8% 되찾았지만 문화 차원은 48.1%에 그쳐, 국가 간 대표 설문의 대리물로는 아직 이르다고 결론 내렸다. 74개국 67,201명의 GPS 응답을 LLM 20개 구성으로 가상 재현한 결과, 개인 수준 일치는 체계적이지만 보통 수준이었고(스피어먼 상관의 87.5%가 신뢰구간 0 초과) 성별·연령·인지능력 차원의 연관 방향은 77.8%, 문화 차원은 48.1%를 되찾아, 거시 추론이나 정책 평가를 위한 국가 간 대표 설문의 대리물로는 아직 신뢰하기 어렵다고 결론 내렸다."},{"id":"42869023","w":"2026-W42","s":"10월 3주","t":"자연스러운 능숙한 비행 중 박쥐 운동피질의 고차원 집단 부호","e":"A high-dimensional population code in the bat motor cortex during natural dexterous flight.","j":"Cell","k":"운동피질 · 자유 비행 박쥐의 집단 부호","o":"자유롭게 나는 박쥐의 날개 운동피질에서 무선으로 대규모 기록하고 날개 운동을 3차원으로 추적했더니, 운동피질 활동은 날갯짓 주기가 지배하지 않았고 신경세포가 성기게 활동하며 비행 운동학에 혼합 선택성을 보여, 연속된 날갯짓이 서로 다른 신경 상태를 차지하는 고차원 집단 부호를 이뤘다. 자유 비행하는 박쥐의 날개 운동피질에서 대규모 무선 기록과 날개 운동학의 3D 추적을 결합했더니, 운동피질 활동은 날갯짓 주기가 지배하지 않았고 신경세포는 성기게 활동하며 비행 운동학에 대한 혼합 선택성과 밀리초 정밀도의 가변적 위상 동조를 보여, 연속된 날갯짓이 구별되는 신경 상태를 차지하는 고차원 집단 부호를 이뤘다."}];                 // 검색 색인 [{id,w,s,t,e,j,k,o}]
+ var DWELL=15000;                 // 논문을 연 뒤 15초는 지나야 '끝까지 읽음'으로 센다(2026-10-08)
+ var BASE_TITLE=document.title;
+ var FRAG={"2026-W42":"859aa4991f1c"};               // {주차: 지문} — 논문 본문은 주차별 파일. 지문을 주소에 붙여 옛 캐시를 피한다
+ var WBASE=document.body.getAttribute('data-wbase')||'w/';
+ var LOADED={},PENDING={},io=null;
+ // 주차 소개글(2026-10-11): 사용자가 사설 서재에서 직접 쓴다. 사설판은 서버에서, 공개판은 옆의 intros.json 에서 읽는다.
+ var PRIV=WBASE.charAt(0)==='/';
+ var IURL=PRIV?WBASE.replace(/w\/$/,'intros'):'intros.json';
+ var INTRO={};
+ var ANS={},LAST=null,CUR=null,SHOWN=0,VIS={};
+ var TRACK='https://api.owndrug.space/lib/e',LIBKEY='psych';   // 이용 기록을 받는 주소 — 공개판에만 들어 있다. 비어 있으면 아무것도 보내지 않는다
+ function $(s,r){return (r||document).querySelector(s)}
+ function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+ function lvGet(){try{return localStorage.getItem(LK)||''}catch(e){return ''}}
+ function lvPaint(v){
+  document.body.setAttribute('data-level',v);
+  $$('[data-setlv]').forEach(function(b){var on=b.getAttribute('data-setlv')===v;
+   b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')});
+ }
+ function lvSet(v){try{localStorage.setItem(LK,v)}catch(e){}lvPaint(v)}
+ // 화면 밝기: 자동(기기 설정) · 밝게 · 어둡게. 두 서재가 같은 값을 쓴다
+ var THK='wl_theme';
+ function thGet(){try{var t=localStorage.getItem(THK);return (t==='dark'||t==='light')?t:'auto'}catch(e){return 'auto'}}
+ function thPaint(){
+  var t=thGet(),de=document.documentElement;
+  if(t==='auto')de.removeAttribute('data-theme');else de.setAttribute('data-theme',t);
+  $$('[data-theme-set]').forEach(function(b){var on=b.getAttribute('data-theme-set')===t;
+   b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')});
+ }
+ function thSet(t){try{if(t==='auto')localStorage.removeItem(THK);else localStorage.setItem(THK,t)}catch(e){} thPaint()}
+ // ── 이용 기록(2026-10-11): 공개 서재에서만, 방문자가 끄지 않았을 때만 익명 신호를 보낸다 ──
+ // **검색어는 보내지 않는다**(사용자 결정). 방문자는 브라우저에 적어 둔 무작위 번호(wl_vid)로만 구분한다.
+ // 화면의 안내와 보내기/보내지 않기 단추는 2026-10-12 사용자 결정으로 없앴다. 그 전에 '보내지 않기'를 골라 둔
+ // 브라우저(wl_notrack=1)는 계속 보내지 않는다.
+ var TOFF='wl_notrack',SID=null,PV=null,VIA='link';
+ function rnd(n){
+  var s='',i;
+  try{var a=new Uint8Array(n/2);window.crypto.getRandomValues(a);for(i=0;i<a.length;i++)s+=('0'+a[i].toString(16)).slice(-2)}
+  catch(e){s='';while(s.length<n)s+=Math.floor(Math.random()*16).toString(16)}
+  return s.slice(0,n);
+ }
+ function trOn(){if(!TRACK||PRIV)return false;try{return localStorage.getItem(TOFF)!=='1'}catch(e){return false}}
+ function trVid(){
+  try{var v=localStorage.getItem('wl_vid');
+   if(!/^[a-f0-9]{16}$/.test(v||'')){v=rnd(16);localStorage.setItem('wl_vid',v)}
+   return v}catch(e){return null}
+ }
+ function tr(ev,d,w,p){
+  if(!trOn())return;
+  var v=trVid(); if(!v)return;
+  if(!SID)SID=rnd(8);
+  var body=JSON.stringify({v:v,s:SID,l:LIBKEY,e:ev,w:w||'',p:p||'',d:d||{}});
+  try{
+   if(navigator.sendBeacon)navigator.sendBeacon(TRACK,new Blob([body],{type:'text/plain'}));
+   else fetch(TRACK,{method:'POST',body:body,mode:'no-cors',keepalive:true});
+  }catch(e){}
+ }
+ function pvStart(w,id){PV={w:w,id:id,t:Date.now(),depth:0,tr:0,all:0,jump:0};tr('open',{via:VIA},w,id);VIA='link'}
+ function pvEnd(){          // 지금까지 머문 만큼을 보내고 시계를 다시 맞춘다(탭을 떠났다 돌아오면 여러 번 나뉘어 간다)
+  if(!PV)return;
+  var sec=Math.round((Date.now()-PV.t)/1000);
+  if(sec>=1)tr('leave',{sec:sec,depth:PV.depth,tr:PV.tr,all:PV.all,jump:PV.jump},PV.w,PV.id);
+  PV.t=Date.now();PV.tr=0;PV.all=0;PV.jump=0;
+ }
+ function trVisit(){
+  var ref='',m=Math.min(screen.width||0,screen.height||0);
+  try{var u=new URL(document.referrer);if(u.host!==location.host)ref=u.hostname}catch(e){}
+  tr('visit',{ref:ref,dev:m&&m<600?'phone':(m&&m<1000?'tablet':'desktop'),lv:lvGet(),th:thGet()});
+ }
+
+ // ── 수준 테스트 상자: 열리면 뒤쪽 본문은 inert(포커스·클릭 차단), Esc 로 닫힌다 ──
+ function modalOn(on){
+  $$('.wrap,#snav,#snrail,#secnav,#bbar').forEach(function(w){if(on)w.setAttribute('inert','');else w.removeAttribute('inert')});
+  document.documentElement.classList.toggle('modal',on);
+ }
+ function quizClose(){
+  $('#lvtest').hidden=true; modalOn(false);
+  if(LAST&&LAST.focus){try{LAST.focus()}catch(e){}} LAST=null;
+ }
+ function quizDismiss(){if(!lvGet())lvSet('mid');quizClose()}   // 안 풀고 닫으면 중(고른 수준이 있으면 그대로)
+ function quizOpen(){
+  if(!QUIZ.q||!QUIZ.q.length)return;
+  var h='';ANS={};
+  QUIZ.q.forEach(function(q,i){
+   h+='<div class="qz" data-i="'+i+'"><p class="qq" id="qq'+i+'">'+(i+1)+'. '+q.q+'</p>'
+    +'<div role="group" aria-labelledby="qq'+i+'">';
+   q.a.forEach(function(a,j){
+    h+='<button type="button" class="qa" data-q="'+i+'" data-a="'+j+'">'+a+'</button>'});
+   h+='</div><p class="qwhy" hidden></p></div>';
+  });
+  $('#lvq').innerHTML=h;
+  $('#lvres').hidden=true;
+  LAST=document.activeElement;
+  $('#lvtest').hidden=false; modalOn(true);
+  var x=$('#lvtest .ovlx'); if(x)x.focus();
+ }
+ function quizAnswer(i,j){
+  if(ANS[i]!==undefined)return;
+  ANS[i]=j;
+  var q=QUIZ.q[i],d=$('.qz[data-i="'+i+'"]');
+  $$('.qa',d).forEach(function(b){
+   var k=+b.getAttribute('data-a');b.classList.add(k===q.c?'ok':(k===j?'no':'off'))});
+  var w=$('.qwhy',d);w.textContent=q.why;w.hidden=false;
+  var n=0;for(var x in ANS)n++;
+  if(n===QUIZ.q.length)quizResult();
+ }
+ function quizResult(){
+  var s=0;QUIZ.q.forEach(function(q,i){if(ANS[i]===q.c)s++});
+  var lv=s>=QUIZ.hi?'hi':(s>=QUIZ.mid?'mid':'lo'),nm={lo:'하',mid:'중',hi:'상'};
+  tr('quiz',{score:s,rec:lv});
+  var r=$('#lvres');
+  r.innerHTML='<p class="qscore">'+QUIZ.q.length+'문항 중 '+s+'개</p>'
+   +'<p class="qrec">추천 수준은 <b>'+nm[lv]+'</b> 입니다. '+QUIZ.say[lv]+'</p>'
+   +'<p class="qpick">실제로 읽을 수준은 직접 고르세요.</p><div class="qbtns">'
+   +['lo','mid','hi'].map(function(k){
+     return '<button type="button" data-pick="'+k+'">'+nm[k]
+       +(k===lv?'<span class="reclab">추천</span>':'')+'</button>'
+    }).join('')+'</div>';
+  r.hidden=false;
+ }
+
+ // ── 읽음 기록 ──
+ var MIG={"2026-W42":["42862582","42862569","42869027","42864430","42869023"]};                 // {주차:[ID…]} — 옛 순번 키를 ID 키로 한 번만 옮긴다
+ var WEEKS=[{"w":"2026-W42","ids":["42862582","42862569","42869027","42864430","42869023"]}];             // [{w:주차, ids:[ID…]}] — 진행률 계산용
+ function load(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return {}}}
+ function save(o){try{localStorage.setItem(K,JSON.stringify(o))}catch(e){}}
+ // 주차 아코디언은 **항상 접힌 채로 시작한다**(사용자 요구). 펼침 상태는 저장하지 않는다 —
+ // 논문에서 돌아올 때는 해시(#주차)가 그 주차를 열어 주므로 저장이 필요 없다.
+ try{localStorage.removeItem('mw_open')}catch(e){}
+ function migrate(){
+  var r=load(),ch=false;
+  for(var w in MIG){MIG[w].forEach(function(id,i){
+   var old=w+'/'+i;
+   if(r[old]){if(!r[id])r[id]=1;delete r[old];ch=true}
+  })}
+  if(ch)save(r);
+ }
+ function counts(w){
+  var r=load(),n=0,d=0;
+  WEEKS.forEach(function(x){if(x.w===w){n=x.ids.length;x.ids.forEach(function(i){if(r[i])d++})}});
+  return {n:n,d:d};
+ }
+ function setRead(id,on){var r=load();if(on)r[id]=1;else delete r[id];save(r);paint()}
+ function paint(){
+  var r=load();
+  $$('[data-wk]').forEach(function(el){
+   var c=counts(el.getAttribute('data-wk'));
+   var b=$('.bar>i',el); if(b)b.style.width=(c.n?Math.round(c.d*100/c.n):0)+'%';
+   var s=$('.prog',el); if(s)s.textContent=c.d+' / '+c.n+' 읽음';
+  });
+  $$('.pitem[data-pmid]').forEach(function(a){
+   var on=!!r[a.getAttribute('data-pmid')];
+   a.classList.toggle('read',on);
+   var c=$('.chk',a); if(c)c.textContent=on?'\u25CF':'\u25CB';
+   var v=$('.vh',a); if(v)v.textContent=on?'읽음':'안 읽음';
+  });
+  $$('[data-readtoggle]').forEach(function(b){
+   b.textContent=r[b.getAttribute('data-readtoggle')]?'읽음 표시 지우기':'읽음으로 표시'});
+  snPaint();resumePaint();
+ }
+ // 끝까지 내려왔고(표지가 보임) 논문을 연 지 DWELL 이 지났을 때만 읽음으로 센다.
+ // 예전엔 표지가 보이는 순간 기록해서 맨 아래로 끌어내리기만 해도 0.8초 만에 읽음이 됐다.
+ function tick(){
+  if(!CUR||!VIS[CUR]||Date.now()-SHOWN<DWELL)return;
+  var r=load(); if(!r[CUR]){r[CUR]=1;save(r);paint();tr('read',{auto:1},PV&&PV.w,CUR)}
+ }
+ function setOpen(w,on){
+  var wk=$('.wk[data-week="'+w+'"]'); if(!wk)return;
+  wk.classList.toggle('open',on);
+  $('.wkbody',wk).hidden=!on;
+  $('.wkhead',wk).setAttribute('aria-expanded',on?'true':'false');
+ }
+ // ── 호별 파일 분할(2026-10-09): 전 호를 한 파일에 쌓으면 1년에 11MB 가 된다. 홈·목록·검색 색인만
+ //    먼저 받고, 논문 본문은 그 주차를 열 때(또는 주차를 펼칠 때 미리) 받는다.
+ function weekOf(h){var m=/^(\d{4}-W\d{2})\//.exec(h);return m?m[1]:null}
+ function loadWeek(w){
+  if(LOADED[w]||!FRAG[w])return Promise.resolve();
+  if(PENDING[w])return PENDING[w];
+  PENDING[w]=fetch(WBASE+w+'.html?v='+FRAG[w],{credentials:'same-origin'}).then(function(r){
+    if(r.status===401)throw new Error('auth');
+    if(!r.ok)throw new Error('http '+r.status);
+    return r.text()})
+   .then(function(t){
+    if(t.indexOf('<section class="view"')!==0)throw new Error('auth');   // 로그인 화면이 돌아온 경우
+    var box=document.createElement('div');box.innerHTML=t;
+    var marks=$$('[data-mark]',box),wrap=$('.wrap');
+    while(box.firstChild)wrap.appendChild(box.firstChild);
+    if(io)marks.forEach(function(el){io.observe(el)});
+    LOADED[w]=1;delete PENDING[w];
+    // 방금 받은 논문 화면의 수준·밝기 단추에도 지금 고른 값을 칠한다(받기 전에 칠한 것은 닿지 않는다)
+    lvPaint(document.body.getAttribute('data-level')||'mid');thPaint();
+   },function(e){delete PENDING[w];throw e});
+  return PENDING[w];
+ }
+ function loadFail(e){
+  $('#vload-msg').textContent=e&&e.message==='auth'
+   ?'로그인이 풀렸습니다. 새로고침하면 비밀번호를 다시 묻습니다.'
+   :'이 주차를 불러오지 못했습니다. 연결을 확인하고 다시 시도하세요.';
+  $('[data-retry]').hidden=false;
+ }
+ function show(first){
+  var h=(location.hash||'').replace('#','');
+  if(h&&!document.getElementById('v-p-'+h.replace('/','-'))){
+   var wk=weekOf(h);
+   if(wk&&FRAG[wk]&&!LOADED[wk]){
+    $('#vload-msg').textContent='불러오는 중…';$('[data-retry]').hidden=true;
+    $$('.view').forEach(function(v){v.hidden=(v.id!=='v-load')});
+    loadWeek(wk).then(function(){if((location.hash||'').replace('#','')===h)show(first)},loadFail);
+    return 'v-load';
+   }
+  }
+  var id='v-home';
+  if(h&&h!=='home'){
+   var t=document.getElementById('v-p-'+h.replace('/','-'));
+   if(t)id=t.id;
+   else if($('.wk[data-week="'+h+'"]')){
+    // '#주차' 는 논문 페이지에서 목록으로 돌아올 때 쓰는 링크다.
+    // 그 해시는 주소창에 남으므로, **새로 열 때(F5 포함)는 무시하고 주소도 지운다** —
+    // 안 그러면 남은 해시 때문에 그 주차가 '기본 펼침'인 것처럼 보인다(2026-08-31 사용자 신고).
+    if(first){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
+    else setOpen(h,true);
+   }
+  }
+  $$('.view').forEach(function(v){v.hidden=(v.id!==id)});
+  var v=document.getElementById(id),tt=v&&v.getAttribute('data-title');
+  document.title=tt?tt+' · '+BASE_TITLE:BASE_TITLE;      // 탭·기록·북마크에 논문 제목이 남게
+  CUR=(v&&v.getAttribute('data-paper'))||null; SHOWN=Date.now();
+  if(PV&&PV.id!==CUR){pvEnd();PV=null}
+  if(CUR&&!PV)pvStart(weekOf(h)||'',CUR);
+  window.scrollTo(0,0); paint();
+  if(id==='v-home'&&QI&&QI.value)search();
+  chrome(v);
+  if(CUR){
+   if(RESUME!=null){var mx=document.documentElement.scrollHeight-window.innerHeight;
+    if(mx>0)window.scrollTo(0,Math.round(RESUME*mx));RESUME=null}
+   lastSave();
+  }
+  return id;
+ }
+
+ // ── 번역 열고 닫기: 번역과 그 아래 수준별 덧붙임은 함께 열리고 함께 닫힌다 ──
+ function toggleEn(en){
+  var k=en.nextElementSibling,on=null;
+  while(k&&(k.classList.contains('ko')||k.classList.contains('lvadd'))){
+   if(on===null)on=!k.hidden;k.hidden=on;k=k.nextElementSibling}
+  if(on!==null)en.setAttribute('aria-expanded',on?'false':'true');
+  if(on===false&&PV)PV.tr++;
+ }
+
+ // ── 검색: 접힌 주차 안은 브라우저 찾기에 걸리지 않으므로 제목·저널·주제를 따로 색인한다 ──
+ var QI=$('#q'),QR=$('#qres');
+ function introPaint(){
+  $$('.wkintro').forEach(function(el){
+   if(el.getAttribute('data-editing'))return;
+   var w=el.getAttribute('data-intro'),t=INTRO[w]||'';
+   el.textContent='';
+   if(t){var p=document.createElement('p');p.className='intro';p.textContent=t;el.appendChild(p)}
+   if(PRIV){var b=document.createElement('button');b.type='button';b.className='lnk';
+    b.setAttribute('data-introedit',w);b.textContent=t?'소개글 고치기':'소개글 쓰기';el.appendChild(b)}
+   el.hidden=!(t||PRIV);
+  });
+ }
+ function introLoad(){
+  fetch(IURL,{credentials:'same-origin',cache:'no-cache'}).then(function(r){return r.ok?r.json():{}})
+   .then(function(o){INTRO=(PRIV?o.intros:o)||{};introPaint()}).catch(function(){introPaint()});
+ }
+ function introBox(w){return $('.wkintro[data-intro="'+w+'"]')}
+ function introEdit(w){
+  var el=introBox(w);if(!el)return;
+  el.setAttribute('data-editing','1');el.textContent='';
+  var ta=document.createElement('textarea');ta.className='introta';ta.rows=5;ta.maxLength=2000;
+  ta.value=INTRO[w]||'';ta.setAttribute('aria-label','주차 소개글');
+  var row=document.createElement('div');row.className='tools';
+  row.innerHTML='<button type="button" data-introsave="'+esc(w)+'">저장</button>'
+   +'<button type="button" class="lnk" data-introcancel="'+esc(w)+'">취소</button>'
+   +'<span class="intromsg" role="status"></span>';
+  el.appendChild(ta);el.appendChild(row);ta.focus();
+ }
+ function introSave(w){
+  var el=introBox(w),ta=$('.introta',el),msg=$('.intromsg',el);
+  msg.textContent='저장하는 중…';
+  fetch(IURL,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({week:w,text:ta.value})})
+   .then(function(r){return r.json().then(function(o){if(!r.ok)throw new Error(o.error||('오류 '+r.status));return o})})
+   .then(function(o){
+    INTRO=o.intros||{};el.removeAttribute('data-editing');introPaint();
+    var n=document.createElement('p');n.className='intromsg';n.setAttribute('role','status');
+    n.textContent=o.auto?'저장했습니다. 공개 서재에는 1~2분 뒤 반영됩니다.':'저장했습니다. 공개 서재에는 다음 발행 때 반영됩니다.';
+    el.appendChild(n)})
+   .catch(function(e){msg.textContent='저장하지 못했습니다: '+e.message});
+ }
+ // ── 화면 기능(2026-10-11): 목록 패널·아래 막대·구역 이동·이어 읽기 ──
+ // 목록은 검색 색인(IDX)과 주차 표(WEEKS)로 그린다. 주차 본문을 받지 않아도 전 호의 제목을 안다.
+ var BYID={};IDX.forEach(function(x){BYID[x.id]=x});
+ var SN=$('#snav'),SNL=$('#snlist'),SNQ=$('#snq'),SEC=$('#secnav'),BB=$('#bbar');
+ var LASTK=K+'_last',RESUME=null,SECS=[],SNLAST=null,SNFIRST=true;
+ function snBuild(){
+  if(!SNL)return;
+  SNL.innerHTML=WEEKS.map(function(x){
+   var nm=(BYID[x.ids[0]]||{}).s||x.w;
+   return '<div class="snw" data-snw="'+x.w+'" data-open="0"><button type="button" class="snwh" aria-expanded="false">'
+    +'<span>'+esc(nm)+'</span><i></i></button><ul>'
+    +x.ids.map(function(id){var p=BYID[id]||{t:id};
+      return '<li><a class="snp" data-snp="'+esc(id)+'" href="#'+x.w+'/'+id+'">'
+       +'<span class="d" aria-hidden="true">\u25CB</span><span class="t">'+esc(p.t)+'</span></a></li>'}).join('')
+    +'</ul></div>'}).join('');
+ }
+ function snOpen(w,on){
+  var el=$('.snw[data-snw="'+w+'"]'); if(!el)return;
+  el.setAttribute('data-open',on?'1':'0');$('.snwh',el).setAttribute('aria-expanded',on?'true':'false');
+ }
+ function snPaint(){
+  if(!SNL)return;
+  var r=load();
+  $$('.snp',SNL).forEach(function(a){
+   var id=a.getAttribute('data-snp'),on=!!r[id];
+   a.classList.toggle('read',on);$('.d',a).textContent=on?'\u25CF':'\u25CB';
+   if(id===CUR)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  $$('.snw',SNL).forEach(function(el){var c=counts(el.getAttribute('data-snw'));$('.snwh i',el).textContent=c.d+'/'+c.n});
+ }
+ function snSync(){        // 지금 보는 논문의 주차를 펼치고 그 줄이 보이게 한다. 처음 홈에서는 최신 주차를 펼친다
+  if(!SNL)return;
+  var w=null;WEEKS.forEach(function(x){if(CUR&&x.ids.indexOf(CUR)>=0)w=x.w});
+  if(!w&&SNFIRST&&WEEKS.length)w=WEEKS[0].w;
+  SNFIRST=false;
+  if(w)snOpen(w,true);
+  snPaint();
+  var cur=$('.snp[aria-current]',SNL);
+  if(cur){var a=cur.getBoundingClientRect(),b=SN.getBoundingClientRect();
+   if(a.top<b.top+70||a.bottom>b.bottom-24)SN.scrollTop+=a.top-b.top-130}
+ }
+ function snFilter(){
+  var q=(SNQ.value||'').toLowerCase().trim(),terms=q?q.split(/\s+/):[];
+  $$('.snw',SNL).forEach(function(el){
+   var any=false;
+   $$('.snp',el).forEach(function(a){
+    var x=BYID[a.getAttribute('data-snp')]||{};
+    var hay=((x.t||'')+' '+(x.e||'')+' '+(x.j||'')+' '+(x.k||'')+' '+(x.s||'')+' '+(x.o||'')).toLowerCase();
+    var ok=terms.every(function(t){return hay.indexOf(t)>=0});
+    a.parentNode.hidden=!ok;if(ok)any=true});
+   el.hidden=!any;snOpen(el.getAttribute('data-snw'),!!q&&any)});
+  if(!q)snSync();
+ }
+ function sheet(on){       // 세로 화면의 목록 판. 가로 화면에서는 패널이 늘 보이므로 아무 일도 없다
+  document.body.classList.toggle('snopen',on);
+  var bk=$('#snback'); if(bk)bk.hidden=!on;
+  if(on){SNLAST=document.activeElement;snSync();var x=$('.snx',SN); if(x)x.focus()}
+  else if(SNLAST&&SNLAST.focus){try{SNLAST.focus()}catch(e){} SNLAST=null}
+ }
+ // 구역 이동: 논문 안의 구역 제목(.sec)에서 만든다. 넓으면 오른쪽 세로 줄, 좁으면 위쪽 칩으로 보인다.
+ var SECLAB=[['한 줄 요약','요약','한 줄 요약'],['무슨 연구인가','연구','무슨 연구인가'],['연구 흐름','흐름','연구 흐름'],
+  ['왜 이 논문인가','왜','왜 이 논문인가'],['ABSTRACT','초록','초록'],['이번 편의 논문 영어','표현','논문 영어'],['참고한 자료','자료','참고한 자료']];
+ function secBuild(v){
+  SECS=[];var h='';
+  if(v&&CUR)$$('.paper .sec',v).forEach(function(el){
+   var t=el.textContent,m=null;
+   SECLAB.forEach(function(x){if(t.indexOf(x[0])===0)m=x});
+   if(!m)return;
+   h+='<button type="button" data-sec="'+SECS.length+'"><span class="l">'+m[2]+'</span><span class="s">'+m[1]+'</span></button>';
+   SECS.push(el)});
+  if(SEC){SEC.innerHTML=h;SEC.hidden=!h}
+  secSpy();
+ }
+ function secSpy(){
+  document.body.classList.toggle('scrolled',(window.pageYOffset||document.documentElement.scrollTop||0)>160);
+  if(!SEC||!SECS.length)return;
+  var on=0;SECS.forEach(function(el,i){if(el.getBoundingClientRect().top<=140)on=i});
+  $$('button',SEC).forEach(function(b,i){b.classList.toggle('on',i===on);
+   if(i===on)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});
+ }
+ // 이어 읽기: 마지막으로 연 논문과 읽던 위치(문서 길이에 대한 비율)를 이 기기에 적어 둔다
+ function lastSave(){
+  if(!CUR)return;
+  var mx=document.documentElement.scrollHeight-window.innerHeight,y=window.pageYOffset||document.documentElement.scrollTop||0;
+  try{localStorage.setItem(LASTK,JSON.stringify({h:(location.hash||'').replace('#',''),id:CUR,r:mx>0?Math.min(1,y/mx):0}))}catch(e){}
+ }
+ function lastGet(){try{return JSON.parse(localStorage.getItem(LASTK)||'null')}catch(e){return null}}
+ function resumePaint(){
+  var el=$('#resume'); if(!el)return;
+  var o=lastGet(),x=o&&BYID[o.id];
+  if(!x||!o.h||load()[o.id]){el.hidden=true;return}      // 다 읽은 논문은 권하지 않는다
+  el.setAttribute('href','#'+o.h);
+  el.innerHTML='<span>이어 읽기 · '+esc(x.s)+'</span>'+esc(x.t);
+  el.hidden=false;
+ }
+ function setLink(a,src){
+  if(!a)return;
+  if(src){a.setAttribute('href',src.getAttribute('href'));a.removeAttribute('aria-disabled')}
+  else{a.removeAttribute('href');a.setAttribute('aria-disabled','true')}
+ }
+ function bbPaint(v){
+  if(!BB)return;
+  BB.hidden=!CUR; if(!CUR)return;
+  setLink($('#bbprev'),$('.pnav a.prev',v));setLink($('#bbnext'),$('.pnav a.next',v));
+  var tg=$('[data-toggle]',v),bt=$('#bbtr');
+  bt.hidden=!tg; if(tg)bt.textContent=tg.getAttribute('data-open')==='1'?'번역 닫기':'번역 열기';
+ }
+ function chrome(v){
+  if(document.body.classList.contains('snopen'))sheet(false);
+  secBuild(v);snSync();bbPaint(v);resumePaint();
+ }
+ var SCT=0;
+ window.addEventListener('scroll',function(){
+  if(SCT)return;
+  SCT=setTimeout(function(){SCT=0;secSpy();lastSave();
+   if(PV){var mx=document.documentElement.scrollHeight-window.innerHeight,y=window.pageYOffset||document.documentElement.scrollTop||0;
+    if(mx>0)PV.depth=Math.max(PV.depth,Math.min(100,Math.round(100*y/mx)))}
+  },120)},{passive:true});
+ document.addEventListener('visibilitychange',function(){if(document.hidden)pvEnd();else if(PV)PV.t=Date.now()});
+ window.addEventListener('pagehide',pvEnd);
+ if(SNQ)SNQ.addEventListener('input',snFilter);
+ snBuild();
+ function search(){
+  var q=(QI.value||'').toLowerCase().trim(),wks=$$('#v-home .wk');
+  if(!q){QR.hidden=true;QR.innerHTML='';wks.forEach(function(w){w.hidden=false});return}
+  var terms=q.split(/\s+/),r=load();
+  var hits=IDX.filter(function(x){
+   var hay=(x.t+' '+x.e+' '+x.j+' '+x.k+' '+x.s+' '+x.o).toLowerCase();
+   return terms.every(function(t){return hay.indexOf(t)>=0})});
+  wks.forEach(function(w){w.hidden=true});
+  QR.innerHTML='<p class="qcount" role="status">'+(hits.length?hits.length+'편':'찾는 논문이 없습니다')+'</p>'
+   +hits.slice(0,80).map(function(x){var on=!!r[x.id];
+    return '<a class="pitem'+(on?' read':'')+'" href="#'+x.w+'/'+x.id+'">'
+     +'<span class="chk" aria-hidden="true">'+(on?'\u25CF':'\u25CB')+'</span><span class="pbody">'
+     +'<span class="pt">'+esc(x.t)+'</span><span class="pm">'+esc(x.s+' · '+x.j)+'</span></span></a>'}).join('');
+  QR.hidden=false;
+ }
+ if(QI)QI.addEventListener('input',search);
+
+ // ── 진도 백업·복원: 기록은 이 기기 브라우저에만 있다. Safari 는 7일 동안 안 열면 지울 수 있다 ──
+ function b64e(s){return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+ function b64d(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(escape(atob(s)))}
+ // ── 설정 창(톱니바퀴): 읽기 수준·화면 밝기·읽음 기록 백업. 열 때마다 백업 코드를 새로 만든다 ──
+ var SETLAST=null;
+ function setIsOpen(){var s=$('#settings');return !!s&&!s.hidden}
+ function setShow(on){
+  var s=$('#settings'); if(!s)return;
+  if(on){
+   if(document.body.classList.contains('snopen'))sheet(false);
+   SETLAST=document.activeElement;
+   var o=$('#bkout'); if(o)o.value=K+'.'+b64e(JSON.stringify({r:Object.keys(load()),l:lvGet()}));
+   var m=$('#bkmsg'); if(m)m.textContent='';
+   s.hidden=false;modalOn(true);
+   var x=$('.ovlx',s); if(x)x.focus();
+  }else{
+   s.hidden=true;modalOn(false);
+   if(SETLAST&&SETLAST.focus){try{SETLAST.focus()}catch(e){}} SETLAST=null;
+  }
+ }
+ // 목록 패널 접기·펴기(가로 화면). 접힘은 이 기기에 기억하고 두 서재가 같이 쓴다
+ function snCollapse(on){
+  try{if(on)localStorage.setItem('wl_snav','0');else localStorage.removeItem('wl_snav')}catch(e){}
+  var de=document.documentElement;
+  if(on)de.setAttribute('data-snav','0');else de.removeAttribute('data-snav');
+  var b=on?$('#snrail [data-snexpand]'):$('#snav [data-sncollapse]');
+  if(!on)snSync();
+  if(b&&b.focus){try{b.focus()}catch(e){}}
+ }
+ function backupCopy(){
+  var t=$('#bkout'),m=$('#bkmsg'); t.select();
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+   navigator.clipboard.writeText(t.value).then(function(){m.textContent='복사했습니다. 메모장이나 메신저에 붙여 두세요.'},
+    function(){m.textContent='위 칸을 직접 선택해 복사하세요.'})}
+  else{try{document.execCommand('copy');m.textContent='복사했습니다.'}catch(e){m.textContent='위 칸을 직접 선택해 복사하세요.'}}
+ }
+ function backupRestore(){
+  var v=($('#bkin').value||'').trim(),m=$('#bkmsg');
+  if(v.indexOf(K+'.')!==0){m.textContent='이 서재의 백업 코드가 아닙니다.';return}
+  try{var o=JSON.parse(b64d(v.slice(K.length+1))),r=load(),n=0;
+   (o.r||[]).forEach(function(id){if(!r[id]){r[id]=1;n++}});save(r);
+   if(o.l)lvSet(o.l);paint();m.textContent='읽음 '+n+'편을 되살렸습니다.'}
+  catch(e){m.textContent='코드를 읽지 못했습니다. 처음부터 끝까지 그대로 붙여 넣었는지 확인하세요.'}
+ }
+
+ window.addEventListener('hashchange',function(){show(false)});
+ document.addEventListener('click',function(e){
+  function at(s){return e.target.closest?e.target.closest(s):null}
+  var lk=at('a[href^="#"]');
+  if(lk)VIA=lk.id==='resume'?'resume':(lk.classList.contains('snp')?'panel':((at('.pnav')||at('#bbar'))?'nav':
+   (at('#qres')?'search':(lk.classList.contains('pitem')?'list':VIA))));
+  var hd=at('.wkhead');
+  if(hd){var wk=hd.parentNode,wid=wk.getAttribute('data-week'),op=!wk.classList.contains('open');
+   setOpen(wid,op); if(op)loadWeek(wid).catch(function(){});   // 펼치면 그 주 본문을 미리 받아 둔다
+   return}
+  if(at('[data-retry]')){show(false);return}
+  var wh=at('.snwh'); if(wh){var sw=wh.parentNode;snOpen(sw.getAttribute('data-snw'),sw.getAttribute('data-open')!=='1');return}
+  if(at('[data-snopen]')){sheet(true);return}
+  if(at('[data-snclose]')){sheet(false);return}
+  var sc=at('[data-sec]');
+  if(sc){var se=SECS[+sc.getAttribute('data-sec')]; if(se)se.scrollIntoView(); if(PV)PV.jump++; return}
+  if(at('[data-bbtr]')){var cv=$('.view:not([hidden])'),tb=cv&&$('[data-toggle]',cv);
+   if(tb){tb.click();bbPaint(cv)} return}
+  if(at('#resume')){var lo=lastGet(); RESUME=lo?lo.r:null; return}       // 주소는 링크가 바꾸고, 위치는 show() 가 맞춘다
+  var ie=at('[data-introedit]'); if(ie){introEdit(ie.getAttribute('data-introedit'));return}
+  var iv=at('[data-introsave]'); if(iv){introSave(iv.getAttribute('data-introsave'));return}
+  var ic=at('[data-introcancel]');
+  if(ic){introBox(ic.getAttribute('data-introcancel')).removeAttribute('data-editing');introPaint();return}
+  var sl=at('[data-setlv]'); if(sl){lvSet(sl.getAttribute('data-setlv'));tr('level',{lv:sl.getAttribute('data-setlv')});return}
+  var th=at('[data-theme-set]'); if(th){thSet(th.getAttribute('data-theme-set'));tr('theme',{th:th.getAttribute('data-theme-set')});return}
+  if(at('[data-quiz]')){if(setIsOpen())setShow(false);quizOpen();return}
+  var qa=at('.qa'); if(qa){quizAnswer(+qa.getAttribute('data-q'),+qa.getAttribute('data-a'));return}
+  var pk=at('[data-pick]'); if(pk){lvSet(pk.getAttribute('data-pick'));tr('level',{lv:pk.getAttribute('data-pick')});quizClose();return}
+  if(at('[data-quizclose]')){quizDismiss();return}
+  var en=at('.en'); if(en){toggleEn(en);return}
+  var b=at('[data-toggle]');
+  if(b){var aid=b.getAttribute('data-toggle'),p=document.getElementById(aid),open=b.getAttribute('data-open')==='1';
+   if(!open&&PV)PV.all=1;
+   $$('.ko,.lvadd',p).forEach(function(k){k.hidden=open});
+   $$('.en',p).forEach(function(x){x.setAttribute('aria-expanded',open?'false':'true')});
+   $$('[data-toggle="'+aid+'"]').forEach(function(x){
+    x.setAttribute('data-open',open?'0':'1');x.textContent=open?'번역 모두 열기':'번역 모두 닫기'});
+   return}
+  var rt=at('[data-readtoggle]');
+  if(rt){var id=rt.getAttribute('data-readtoggle'),nowon=!load()[id];setRead(id,nowon);
+   if(nowon)tr('read',{auto:0},PV&&PV.w,id);return}
+  if(at('[data-settings]')){setShow(true);return}
+  if(at('[data-setclose]')||e.target.id==='settings'){setShow(false);return}
+  if(at('[data-sncollapse]')){snCollapse(true);return}
+  if(at('[data-snexpand]')){snCollapse(false);return}
+  if(at('[data-bkcopy]')){backupCopy();return}
+  if(at('[data-bkrestore]')){backupRestore();return}
+ });
+ document.addEventListener('keydown',function(e){
+  var ov=$('#lvtest');
+  if(e.key==='Escape'&&ov&&!ov.hidden){quizDismiss();return}
+  if(e.key==='Escape'&&setIsOpen()){setShow(false);return}
+  if(e.key==='Escape'&&document.body.classList.contains('snopen')){sheet(false);return}
+  var t=e.target;
+  if((e.key==='Enter'||e.key===' ')&&t&&t.classList&&t.classList.contains('en')){e.preventDefault();toggleEn(t)}
+ });
+ migrate();
+ WEEKS.forEach(function(x){setOpen(x.w,false)});   // 전부 접힌 상태로 시작
+ if('IntersectionObserver' in window){
+  io=new IntersectionObserver(function(es){
+   es.forEach(function(e){VIS[e.target.getAttribute('data-mark')]=e.isIntersecting});
+   tick();
+  },{threshold:0.6});
+  $$('[data-mark]').forEach(function(el){io.observe(el)});
+  setInterval(tick,1000);
+ }
+ introLoad();
+ thPaint();
+ window.addEventListener('storage',function(e){if(e.key===THK)thPaint()});     // 다른 탭에서 바꾸면 같이 바뀐다
+ var lv0=lvGet();
+ lvPaint(lv0||'mid');
+ trVisit();
+ var v0=show(true);
+ // 처음 온 사람에게는 수준 테스트를 먼저 보여 준다. 단 공유받은 논문 링크로 바로 들어온 사람의
+ // 논문은 가리지 않는다(2026-10-08) — 중으로 보여 주고, 위쪽 막대의 '수준 테스트'로 언제든 푼다.
+ if(!lv0&&v0==='v-home')quizOpen();
+})();
+</script></body></html>
