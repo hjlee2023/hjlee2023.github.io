@@ -39,6 +39,7 @@ b,strong{font-weight:700}
 .dl{background:var(--card);border-radius:22px;padding:22px 20px;display:flex;flex-direction:column;gap:12px;text-align:center}
 .btn{display:block;font-family:var(--display);font-size:22px;color:var(--ink);text-decoration:none;background:var(--butter);border:3px solid var(--ink);border-radius:18px;padding:16px 12px;box-shadow:0 4px 0 var(--ink)}
 .btn:active{transform:translateY(4px);box-shadow:none}
+.btn2{font-size:18px;background:var(--card);padding:12px;margin-top:6px}
 .btn:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
 .meta{font-size:14px;color:var(--muted)}
 
@@ -103,10 +104,13 @@ details[open] summary{margin-bottom:6px}
     <a class="btn" href="wolganyang.apk" download="월가냥.apk">월가냥 앱 받기</a>
     <p class="meta">갤럭시(안드로이드) 전용 · 버전 1.1 · 68KB</p>
     <p class="meta">이 페이지를 <b>갤럭시 폰에서</b> 열고 눌러 주세요.</p>
+    <a class="btn btn2" href="wolganyang-installer.apk" download="월가냥설치도우미.apk">설치가 안 되면: 설치 도우미 받기</a>
+    <p class="meta">"앱이 설치되지 않았습니다"만 뜰 때 써요. <a href="#helper">사용법</a></p>
   </section>
 
   <nav class="toc" aria-label="목차">
     <a href="#install">1. 설치하기</a>
+    <a href="#helper">설치가 안 될 때</a>
     <a href="#setup">2. 처음 설정</a>
     <a href="#check">3. 잘 되는지 확인</a>
     <a href="#how">4. 이렇게 놀아요</a>
@@ -129,20 +133,6 @@ details[open] summary{margin-bottom:6px}
 
     <div class="step">
       <span class="n">2</span>
-      <h3>Play 프로텍트 잠깐 끄기</h3>
-      <div class="body">
-        <p><b>이걸 안 하면 설치 막대가 차다가 "앱이 설치되지 않았습니다"로 끝나요.</b> '무시하고 설치'를 눌러도 소용없어요.</p>
-        <ul>
-          <li><b>Play 스토어</b> 앱을 열어요</li>
-          <li>오른쪽 위 <b>내 프로필 동그라미</b> → <span class="k">Play 프로텍트</span></li>
-          <li>오른쪽 위 <b>톱니바퀴</b> → <b>Play 프로텍트로 앱 검사</b> 스위치를 끄고 <span class="k">사용 중지</span></li>
-        </ul>
-        <p class="cap">왜 그러냐면: 구글이 2025년 9월부터 한국에서 "인터넷으로 받은 앱 중 <b>알림 접근</b> 권한을 쓰는 앱"은 무조건 막아요(문자 사기 앱이 이 권한을 쓰거든요). 월가냥은 유튜브에서 지금 어떤 영상이 나오는지 보려고 이 권한을 써서 같이 걸려요. 설치가 끝나면 5번에서 바로 다시 켜요.</p>
-      </div>
-    </div>
-
-    <div class="step">
-      <span class="n">3</span>
       <h3>받은 파일 열기</h3>
       <div class="body">
         <p>화면 아래나 알림창에 뜬 <span class="k">열기</span>를 눌러요.</p>
@@ -154,7 +144,7 @@ details[open] summary{margin-bottom:6px}
     </div>
 
     <div class="step">
-      <span class="n">4</span>
+      <span class="n">3</span>
       <h3>설치 허용하기</h3>
       <div class="body">
         <p>"출처를 알 수 없는 앱" 이라는 창이 뜨면:</p>
@@ -164,17 +154,48 @@ details[open] summary{margin-bottom:6px}
           <li>뒤로 가기 한 번 → <span class="k">설치</span></li>
         </ul>
         <p>그래도 "Play 프로텍트" 창이 뜨면 <span class="k">세부정보 더보기</span> → <span class="k">무시하고 설치</span>(또는 <span class="k">그래도 설치</span>)를 눌러요. (<span class="k">앱 검사</span>를 권하면 <span class="k">검사하지 않음</span>을 눌러도 돼요.)</p>
-        <div class="warn"><b>"앱이 설치되지 않았습니다"가 나오면</b><br>2번(Play 프로텍트 끄기)이 안 된 거예요. Play 스토어에서 스위치가 꺼져 있는지 다시 보고 3번부터 해 주세요.<br><br><b>설치가 아예 막혔다고 나오면</b><br>삼성의 '자동 차단' 기능 때문이에요. <b>설정</b> → <b>보안 및 개인정보 보호</b> → <b>자동 차단</b> 을 잠깐 끄고 다시 3번부터 해 주세요. 설치가 끝나면 다시 켜도 돼요.</div>
+        <div class="warn"><b>"앱이 설치되지 않았습니다"만 나오면</b><br>아래 <a href="#helper">설치가 안 될 때</a>의 <b>설치 도우미</b>를 써 주세요.<br><br><b>설치가 아예 막혔다고 나오면</b><br>삼성의 '자동 차단' 기능 때문이에요. <b>설정</b> → <b>보안 및 개인정보 보호</b> → <b>자동 차단</b> 을 잠깐 끄고 다시 2번부터 해 주세요. 설치가 끝나면 다시 켜도 돼요.</div>
       </div>
     </div>
 
     <div class="step">
-      <span class="n">5</span>
-      <h3>설치 끝, Play 프로텍트 다시 켜기</h3>
+      <span class="n">4</span>
+      <h3>설치 끝</h3>
       <div class="body">
-        <p>앱 목록에 노란 고양이 아이콘 <b>월가냥</b>이 생겼어요.</p>
-        <p>이제 <b>Play 스토어</b> → 프로필 → <span class="k">Play 프로텍트</span> → 톱니바퀴 → <b>Play 프로텍트로 앱 검사</b>를 <b>다시 켜요</b>. 다시 켜도 월가냥은 그대로 남아요(막는 건 설치하는 순간뿐이에요).</p>
-        <p>그다음 월가냥을 <span class="k">열기</span>.</p>
+        <p>앱 목록에 노란 고양이 아이콘 <b>월가냥</b>이 생겼어요. <span class="k">열기</span>를 눌러요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 설치가 안 될 때 -->
+  <section class="part" id="helper">
+    <h2>설치가 안 될 때</h2>
+    <p class="lead">'설치 중…' 막대가 차다가 <b>"앱이 설치되지 않았습니다"</b>로 끝나면, 폰이 이유를 안 보여 주는 거예요. <b>설치 도우미</b>가 월가냥을 대신 설치하고, 안 되면 진짜 이유를 화면에 보여 줘요.</p>
+
+    <div class="step">
+      <span class="n">1</span>
+      <h3>설치 도우미 받아서 설치</h3>
+      <div class="body">
+        <p>맨 위 하얀 <span class="k">설치가 안 되면: 설치 도우미 받기</span>를 눌러 받고, 월가냥 때처럼 열어서 설치해요.</p>
+        <p class="cap">도우미 안에 월가냥이 들어 있어요. 알림 접근 같은 권한이 없어서 도우미는 보통 바로 설치돼요.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n">2</span>
+      <h3>도우미에서 버튼 누르기</h3>
+      <div class="body">
+        <ul>
+          <li><span class="k">1단계: 설치 허용 켜기</span> → <b>이 출처 허용</b> 켜고 뒤로 가기</li>
+          <li><span class="k">월가냥 설치하기</span> → 뜨는 창에서 <span class="k">설치</span></li>
+        </ul>
+        <p>초록 <b>설치 완료!</b>가 뜨면 <span class="k">월가냥 열기</span>를 누르고 "2. 처음 설정"으로 가면 돼요.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n">3</span>
+      <h3>빨간 '설치되지 않았어요'가 뜨면</h3>
+      <div class="body">
+        <p>빨간 칸에 이유와 할 일이 나와요. 그대로 해 보고, 그래도 안 되면 <span class="k">결과 보내기 (카톡 등)</span>로 남자친구에게 보내 주세요. 폰 기종·버전과 정확한 오류가 다 들어 있어서 바로 고칠 수 있어요.</p>
       </div>
     </div>
   </section>
@@ -349,9 +370,9 @@ details[open] summary{margin-bottom:6px}
       <details><summary>폰에서 앱을 지우면요?</summary>
         <p>모은 고양이와 기록이 <b>모두 사라져요.</b> 지우지 말아 주세요.</p></details>
       <details><summary>새 버전이 나왔다고 하면요?</summary>
-        <p>이 페이지에서 다시 <b>월가냥 앱 받기</b> → 열기 → <b>업데이트</b>를 누르면 돼요. 기존 앱을 지우지 않고 덮어 설치하면 고양이와 기록이 그대로 남아요. 업데이트할 때도 처음처럼 <b>Play 프로텍트를 잠깐 껐다가</b> 끝나면 다시 켜 주세요.</p></details>
+        <p>이 페이지에서 다시 <b>월가냥 앱 받기</b> → 열기 → <b>업데이트</b>를 누르면 돼요. 기존 앱을 지우지 않고 덮어 설치하면 고양이와 기록이 그대로 남아요. 설치 도우미로 설치했다면 새 도우미를 받아 같은 버튼을 눌러도 돼요.</p></details>
       <details><summary>"앱이 설치되지 않았습니다"만 떠요</summary>
-        <p>구글 Play 프로텍트가 알림 접근 권한 때문에 막은 거예요. 용량이나 파일 문제가 아니에요. 설치하기 2번대로 Play 프로텍트를 잠깐 끄고 다시 설치한 뒤, 다시 켜 주세요.</p></details>
+        <p>폰이 이유를 숨긴 거예요. <a href="#helper">설치 도우미</a>를 쓰면 진짜 이유가 보여요.</p></details>
     </div>
   </section>
 
