@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0d1026">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="오늘 밤">
 <title>오늘 밤 할 것</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root {
@@ -57,7 +64,8 @@
     position: relative;
     max-width: 520px;
     margin: 0 auto;
-    padding: max(28px, env(safe-area-inset-top)) 16px max(40px, env(safe-area-inset-bottom));
+    padding: calc(env(safe-area-inset-top, 0px) + 28px) 16px calc(env(safe-area-inset-bottom, 0px) + 40px);
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -277,6 +285,134 @@
   .odds li.double .pc { color: var(--accent); font-weight: 700; }
   .note { margin: 4px 0 12px; color: var(--faint); font-size: 13px; line-height: 1.6; }
 
+  /* 연속 칩 */
+  .streak {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 10px; padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--line);
+    font-size: 13px; font-weight: 700; color: var(--muted);
+    min-height: 30px;
+  }
+  .streak.on { color: #ffe3a3; border-color: rgba(255, 209, 102, .35); background: rgba(255, 209, 102, .08); }
+  .streak b { font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .streak.on b { color: #ffd166; }
+  .streak:empty { visibility: hidden; }
+
+  /* 알림 */
+  .push p { margin: 0 0 12px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .push .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .push button {
+    appearance: none; border: 1px solid var(--line); background: rgba(255,255,255,.06); color: var(--ink);
+    border-radius: 12px; padding: 11px 14px; font: 700 14px var(--font); cursor: pointer;
+  }
+  .push button.main { background: linear-gradient(180deg, #ffe08a, #ffc23d); color: #1d1a0b; border: 0; }
+  .push button:disabled { opacity: .5; cursor: default; }
+  .push .msg { margin: 10px 0 0; font-size: 13px; color: var(--faint); min-height: 18px; }
+
+  /* 알림 토스트 */
+  .toast {
+    position: fixed; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 16px);
+    transform: translate(-50%, -20px); opacity: 0;
+    z-index: 20; pointer-events: none;
+    padding: 12px 18px; border-radius: 999px;
+    background: rgba(20, 22, 52, .85); border: 1px solid rgba(255, 209, 102, .4);
+    color: #ffe9b8; font-weight: 700; font-size: 15px; white-space: nowrap;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0,0,0,.4), 0 0 30px rgba(255, 209, 102, .15);
+    transition: opacity .5s ease, transform .5s cubic-bezier(.2, 1.3, .4, 1);
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  /* ── 밤하늘 층(연속 기록에 따라 켜진다) ─────────────────────────── */
+  #sky { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  .aurora, .bigmoon { position: fixed; pointer-events: none; z-index: 0; opacity: 0; transition: opacity 2.5s ease; }
+  .aurora { left: -20%; right: -20%; top: -8vh; height: 62vh; }
+  .aurora i { position: absolute; border-radius: 50%; filter: blur(28px); animation: drift 18s ease-in-out infinite alternate; }
+  .aurora i:nth-child(1) { left: 5%; top: 18%; width: 70%; height: 26%; transform: rotate(-12deg); background: radial-gradient(closest-side, rgba(64, 230, 170, .5), rgba(64, 230, 170, 0)); }
+  .aurora i:nth-child(2) { left: 35%; top: 4%; width: 60%; height: 24%; background: radial-gradient(closest-side, rgba(80, 170, 255, .42), rgba(80, 170, 255, 0)); animation-duration: 24s; animation-delay: -6s; }
+  .aurora i:nth-child(3) { left: 0; top: 38%; width: 55%; height: 22%; background: radial-gradient(closest-side, rgba(170, 110, 255, 0), rgba(170, 110, 255, 0)); animation-duration: 21s; animation-delay: -11s; }
+  @keyframes drift { 0% { transform: translate(-6%, 0) rotate(-10deg) scale(1); } 100% { transform: translate(8%, 5%) rotate(-4deg) scale(1.15); } }
+  .bigmoon {
+    top: calc(env(safe-area-inset-top, 0px) + 46px); right: -54px; width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle at 36% 34%, #fffdf6 0%, #f6f0de 38%, #e3d8bd 72%, #cbbf9f 100%);
+    box-shadow: 0 0 50px 16px rgba(255, 244, 214, .16), 0 0 140px 50px rgba(255, 236, 190, .08);
+  }
+  .bigmoon::after {      /* 달 표면 얼룩(은은하게) */
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 58%, rgba(160, 150, 125, .22) 0 7%, transparent 9%),
+      radial-gradient(circle at 56% 32%, rgba(160, 150, 125, .16) 0 5%, transparent 7%),
+      radial-gradient(circle at 64% 64%, rgba(160, 150, 125, .18) 0 9%, transparent 12%),
+      radial-gradient(circle at 42% 80%, rgba(160, 150, 125, .12) 0 4%, transparent 6%);
+    filter: blur(1.5px);
+  }
+  @media (max-width: 480px) { .bigmoon { width: 140px; height: 140px; right: -62px; top: calc(env(safe-area-inset-top, 0px) + 4px); } }
+  .wheel .glow { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; transition: box-shadow 1.5s ease; }
+  .bulbs { position: absolute; inset: 0; pointer-events: none; display: none; z-index: 1; }
+  .bulbs i {
+    position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%;
+    background: #fff3c4; box-shadow: 0 0 6px 2px rgba(255, 220, 120, .7);
+    transform: rotate(var(--a)) translateY(calc(min(88vw, 420px) / -2 + 5px));
+    animation: blink 1.2s steps(2, jump-none) infinite;
+  }
+  .bulbs i:nth-child(odd) { animation-delay: -.6s; }
+  @keyframes blink { 0% { opacity: 1; } 100% { opacity: .25; } }
+  @keyframes hue { to { filter: hue-rotate(360deg); } }
+  @keyframes shimmer { to { background-position: 200% 0; } }
+
+  body[data-lv="3"], body[data-lv="4"] {
+    background:
+      radial-gradient(900px 520px at 50% -8%, #24407a 0%, rgba(36, 64, 122, 0) 62%),
+      radial-gradient(700px 420px at 10% 110%, #133f4a 0%, rgba(19, 63, 74, 0) 60%),
+      var(--bg);
+  }
+  body[data-lv="5"], body[data-lv="6"] {
+    background:
+      radial-gradient(900px 560px at 50% -10%, #3a2f86 0%, rgba(58, 47, 134, 0) 62%),
+      radial-gradient(700px 480px at 100% 100%, #4a1f63 0%, rgba(74, 31, 99, 0) 60%),
+      radial-gradient(600px 420px at 0% 70%, #163b5a 0%, rgba(22, 59, 90, 0) 60%),
+      #0a0b22;
+  }
+  body[data-lv="7"] {
+    background:
+      radial-gradient(1000px 600px at 50% -10%, #4b2d92 0%, rgba(75, 45, 146, 0) 62%),
+      radial-gradient(800px 500px at 100% 100%, #6a1f6e 0%, rgba(106, 31, 110, 0) 60%),
+      radial-gradient(700px 500px at 0% 60%, #12476a 0%, rgba(18, 71, 106, 0) 60%),
+      #090a1f;
+  }
+  body[data-lv="8"] {
+    background:
+      radial-gradient(1000px 600px at 50% -10%, #3d2f8f 0%, rgba(61, 47, 143, 0) 60%),
+      radial-gradient(1200px 500px at 50% 120%, #8a4a2a 0%, rgba(138, 74, 42, 0) 60%),
+      radial-gradient(700px 500px at 100% 70%, #6a1f6e 0%, rgba(106, 31, 110, 0) 60%),
+      #0a0a1e;
+  }
+  body[data-lv] { background-attachment: fixed; }
+
+  body:is([data-lv="3"], [data-lv="4"], [data-lv="5"], [data-lv="6"], [data-lv="7"], [data-lv="8"]) .aurora { opacity: .55; }
+  body:is([data-lv="5"], [data-lv="6"], [data-lv="7"], [data-lv="8"]) .aurora i:nth-child(3) { background: radial-gradient(closest-side, rgba(200, 110, 255, .42), rgba(200, 110, 255, 0)); }
+  body:is([data-lv="7"], [data-lv="8"]) .aurora { opacity: .85; }
+  body:is([data-lv="4"], [data-lv="5"], [data-lv="6"], [data-lv="7"], [data-lv="8"]) .bigmoon { opacity: .85; }
+  body[data-lv="8"] .bigmoon { background: radial-gradient(circle at 38% 36%, #fff8e0 0%, #ffe39a 40%, #f2b95a 80%, #d98f3a 100%); box-shadow: 0 0 80px 30px rgba(255, 200, 100, .3), 0 0 200px 80px rgba(255, 170, 80, .15); }
+
+  body:is([data-lv="3"], [data-lv="4"], [data-lv="5"]) .wheel .glow { box-shadow: 0 0 0 2px rgba(255, 209, 102, .55), 0 0 36px 4px rgba(255, 209, 102, .28); }
+  body:is([data-lv="6"], [data-lv="7"], [data-lv="8"]) .wheel .glow { box-shadow: 0 0 0 2px rgba(255, 120, 160, .6), 0 0 44px 8px rgba(255, 120, 200, .35); animation: hue 7s linear infinite; }
+  body:is([data-lv="4"], [data-lv="5"], [data-lv="6"], [data-lv="7"], [data-lv="8"]) .bulbs { display: block; }
+  body[data-lv="8"] .bulbs i { background: #fff; box-shadow: 0 0 8px 3px rgba(255, 210, 90, .95); }
+  body:is([data-lv="5"], [data-lv="6"], [data-lv="7"], [data-lv="8"]) .hub { box-shadow: 0 0 0 3px rgba(255,255,255,.9), 0 0 24px 6px rgba(255, 209, 102, .45), 0 6px 18px rgba(0,0,0,.5); }
+  body:is([data-lv="5"], [data-lv="6"], [data-lv="7"], [data-lv="8"]) .pointer { filter: drop-shadow(0 4px 6px rgba(0,0,0,.5)) drop-shadow(0 0 10px rgba(255, 209, 102, .8)); }
+  body:is([data-lv="7"], [data-lv="8"]) h1 {
+    background: linear-gradient(90deg, #fff 0%, #ffe39a 25%, #c9b6ff 50%, #fff 75%, #ffe39a 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+  body:is([data-lv="7"], [data-lv="8"]) h1 .moon { -webkit-text-fill-color: initial; color: var(--accent); }
+  body:is([data-lv="7"], [data-lv="8"]) .card.filled { border-color: rgba(255, 209, 102, .35); }
+  body[data-lv="8"] .spin:not(:disabled) { background: linear-gradient(180deg, #fff1b8, #ffc23d 60%, #ff9f43); box-shadow: 0 8px 30px rgba(255, 170, 60, .5), 0 2px 0 rgba(255,255,255,.6) inset; }
+
   @media (max-width: 360px) {
     h1 { font-size: 26px; }
     .pick { font-size: 17px; }
@@ -284,15 +420,20 @@
     .hist li { grid-template-columns: 56px 1fr 1fr; font-size: 13px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .pop, .pick.waiting { animation: none; }
+    .pop, .pick.waiting, .aurora i, .bulbs i, .wheel .glow, h1 { animation: none !important; }
   }
 </style>
 </head>
 <body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bigmoon" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status"></div>
 <main>
   <header>
     <p class="date" id="date">&nbsp;</p>
     <h1><span class="moon">☾</span> 오늘 밤 할 것</h1>
+    <div class="streak" id="streak"></div>
   </header>
 
   <div class="wheel" id="wheel">
@@ -300,6 +441,8 @@
       <path d="M17 43 C 12 34, 2 24, 2 15 A 15 15 0 0 1 32 15 C 32 24, 22 34, 17 43 Z" fill="#ffd166" stroke="#fff6d6" stroke-width="2"/>
       <circle cx="17" cy="15" r="5" fill="#1d1a0b" opacity=".75"/>
     </svg>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="bulbs" id="bulbs" aria-hidden="true"></div>
     <canvas id="cv" role="img" aria-label="오늘 밤 할 것 룰렛"></canvas>
     <div class="hub" aria-hidden="true">
       <svg viewBox="0 0 24 24"><path d="M15.5 3.2a8.8 8.8 0 1 0 5.3 12.9A7.2 7.2 0 0 1 15.5 3.2Z" fill="#ffd166"/></svg>
@@ -324,6 +467,12 @@
   <section class="panel" id="stats" aria-labelledby="stats-h">
     <h2 id="stats-h">기록</h2>
     <div id="stats-body"><p class="empty-note">불러오는 중…</p></div>
+  </section>
+
+  <section class="panel push" id="push" hidden aria-labelledby="push-h">
+    <h2 id="push-h">알림</h2>
+    <div id="push-body"></div>
+    <p class="msg" id="push-msg" aria-live="polite"></p>
   </section>
 
   <details>
@@ -540,6 +689,8 @@
     if (!S) return;
     renderStats();
     if (busy) return;
+    renderStreak();
+    applyTheme(S.streak || 0);
     const rec = focusRecord();
     if (rec) {
       setCard(1, rec.first.n, "shown");
@@ -605,6 +756,7 @@
     S = state;
     skew = Date.parse(state.now) - Date.now();
     render();
+    if (!pushStarted) { pushStarted = true; pushInit(); }
   }
   function showFail() {
     failed = true;
@@ -673,6 +825,8 @@
     btn.textContent = "오늘 밤은 이걸로!";
     statusEl.textContent = "기록했어요 · 다음 판은 내일 밤 10시";
     renderStats();
+    renderStreak();
+    setTimeout(() => applyTheme(S.streak || 0), 700);
   }
   btn.addEventListener("click", go);
 
@@ -741,6 +895,242 @@
     box.innerHTML = h;
     const more = $("more");
     if (more) more.addEventListener("click", () => { showAll = !showAll; renderStats(); });
+  }
+
+  // ── 연속 칩 ─────────────────────────────────────────────────────
+  function renderStreak() {
+    const el = $("streak");
+    const k = (S && S.streak) || 0;
+    el.classList.toggle("on", k > 0);
+    if (k > 0) el.innerHTML = `🔥 <b>${k}</b>밤 연속${S.today_done ? " · 오늘 완료 ✓" : ""}`;
+    else el.textContent = S && S.open ? "🕯️ 오늘 밤이 첫 불씨" : "🕯️ 오늘 밤 10시에 첫 불씨";
+  }
+
+  // ── 밤하늘 (연속 기록이 길어질수록 바뀐다. 무엇이 언제 바뀌는지는 비밀) ──
+  const TIERS = [0, 1, 3, 7, 14, 21, 30, 50, 100];
+  const levelOf = k => TIERS.filter(t => k >= t).length - 1;
+  const LV_KEY = "tonight-roulette:lv";
+  let curLv = -1;
+  function applyTheme(streak) {
+    const lv = levelOf(streak);
+    if (lv === curLv) return;
+    curLv = lv;
+    document.body.dataset.lv = lv;
+    sky.setLevel(lv);
+    let seen = null;
+    try { seen = localStorage.getItem(LV_KEY); } catch (e) {}
+    if (seen !== null && lv > Number(seen)) toast("✨ 밤하늘이 바뀌었어요");
+    try { localStorage.setItem(LV_KEY, String(lv)); } catch (e) {}
+  }
+  function toast(text) {
+    const t = $("toast");
+    t.textContent = text;
+    t.classList.add("show");
+    clearTimeout(toast._h);
+    toast._h = setTimeout(() => t.classList.remove("show"), 3800);
+  }
+  // 테두리 전구
+  (() => {
+    const b = $("bulbs");
+    for (let i = 0; i < 24; i++) {
+      const d = document.createElement("i");
+      d.style.setProperty("--a", `${i * 15}deg`);
+      b.append(d);
+    }
+  })();
+
+  const sky = (() => {
+    const c = $("sky"), g = c.getContext("2d");
+    let W = 0, H = 0, dpr = 1, lv = 0, raf = 0, last = 0;
+    let stars = [], shoots = [], dust = [], cons = [], band = null;
+    const R = (a, b) => a + Math.random() * (b - a);   // 장식용 난수(뽑기와 무관)
+    const COUNT = [0, 70, 100, 130, 160, 190, 220, 250, 290];
+    const SHOOT = [0, 0, .006, .008, .01, .013, .016, .02, .026];
+    const TINTS = ["255,255,255", "200,215,255", "255,236,200", "220,200,255"];
+
+    function size() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = innerWidth; H = innerHeight;
+      c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+      build();
+    }
+    function build() {
+      stars = Array.from({ length: COUNT[lv] }, () => ({
+        x: R(0, W), y: R(0, H), r: R(.35, 1.3) * (lv >= 5 ? 1.15 : 1), a: R(.35, .95),
+        sp: R(.6, 2.2), ph: R(0, 6.28), tint: lv >= 5 ? TINTS[Math.floor(R(0, TINTS.length))] : TINTS[0],
+      }));
+      cons = [];
+      if (lv >= 5) {
+        const shapes = [   // 별자리 모양(상대 좌표)
+          [[0, 0], [.08, .03], [.15, .01], [.21, .05], [.25, .12], [.18, .14], [.14, .08]],
+          [[0, 0], [.05, .07], [.1, .02], [.15, .09], [.2, .03]],
+          [[0, .06], [.06, 0], [.12, .05], [.1, .13], [.03, .12]],
+        ];
+        const spots = [[.06, .1], [.62, .06], [.7, .7]];
+        shapes.forEach((sh, i) => {
+          const s = Math.min(W, 700), [ox, oy] = spots[i];
+          cons.push(sh.map(([x, y]) => [ox * W + x * s, oy * H + y * s]));
+        });
+      }
+      band = null;
+      if (lv >= 6) {           // 은하수: 미리 그려 둔다
+        band = document.createElement("canvas");
+        band.width = c.width; band.height = c.height;
+        const bg = band.getContext("2d");
+        bg.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const cx = W * .5, cy = H * .45, ang = -0.55, len = Math.hypot(W, H);
+        bg.save(); bg.translate(cx, cy); bg.rotate(ang);
+        const grad = bg.createLinearGradient(0, -H * .18, 0, H * .18);
+        grad.addColorStop(0, "rgba(150,130,255,0)");
+        grad.addColorStop(.5, lv >= 7 ? "rgba(210,170,255,.16)" : "rgba(180,170,255,.11)");
+        grad.addColorStop(1, "rgba(150,130,255,0)");
+        bg.fillStyle = grad; bg.fillRect(-len / 2, -H * .18, len, H * .36);
+        for (let i = 0; i < 900; i++) {
+          const x = R(-len / 2, len / 2);
+          const y = (Math.random() + Math.random() + Math.random() - 1.5) * H * .09;
+          bg.fillStyle = `rgba(255,255,255,${R(.15, .7)})`;
+          bg.fillRect(x, y, R(.5, 1.2), R(.5, 1.2));
+        }
+        bg.restore();
+      }
+      dust = lv >= 8 ? Array.from({ length: 40 }, () => ({ x: R(0, W), y: R(0, H), v: R(8, 22), r: R(.8, 2), ph: R(0, 6.28) })) : [];
+      shoots = [];
+    }
+    function frame(t) {
+      raf = requestAnimationFrame(frame);
+      if (t - last < 33) return;              // 30fps 정도면 충분
+      const dt = last ? Math.min(.1, (t - last) / 1000) : .033;
+      last = t;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      g.clearRect(0, 0, W, H);
+      if (band) { g.setTransform(1, 0, 0, 1, 0, 0); g.drawImage(band, 0, 0); g.setTransform(dpr, 0, 0, dpr, 0, 0); }
+      const sec = t / 1000;
+      for (const s of stars) {
+        const a = s.a * (.6 + .4 * Math.sin(sec * s.sp + s.ph));
+        g.fillStyle = `rgba(${s.tint},${a})`;
+        g.beginPath(); g.arc(s.x, s.y, s.r, 0, 6.283); g.fill();
+      }
+      if (cons.length) {
+        g.strokeStyle = `rgba(190,200,255,${.16 + .06 * Math.sin(sec * .8)})`;
+        g.lineWidth = .8;
+        for (const pts of cons) {
+          g.beginPath(); pts.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.stroke();
+          for (const [x, y] of pts) { g.fillStyle = "rgba(255,255,255,.9)"; g.beginPath(); g.arc(x, y, 1.6, 0, 6.283); g.fill(); }
+        }
+      }
+      if (Math.random() < SHOOT[lv]) {
+        const fromLeft = Math.random() < .5;
+        shoots.push({ x: fromLeft ? R(-50, W * .5) : R(W * .5, W + 50), y: R(-20, H * .35), vx: (fromLeft ? 1 : -1) * R(380, 620), vy: R(160, 300), life: 0, max: R(.7, 1.2) });
+      }
+      shoots = shoots.filter(s => (s.life += dt) < s.max);
+      for (const s of shoots) {
+        s.x += s.vx * dt; s.y += s.vy * dt;
+        const k = 1 - s.life / s.max, tail = .09;
+        const gr = g.createLinearGradient(s.x, s.y, s.x - s.vx * tail, s.y - s.vy * tail);
+        gr.addColorStop(0, `rgba(255,250,230,${.95 * k})`); gr.addColorStop(1, "rgba(255,250,230,0)");
+        g.strokeStyle = gr; g.lineWidth = 1.8; g.lineCap = "round";
+        g.beginPath(); g.moveTo(s.x, s.y); g.lineTo(s.x - s.vx * tail, s.y - s.vy * tail); g.stroke();
+      }
+      for (const d of dust) {
+        d.y -= d.v * dt; if (d.y < -10) { d.y = H + 10; d.x = R(0, W); }
+        g.fillStyle = `rgba(255,214,120,${.35 + .3 * Math.sin(sec * 2 + d.ph)})`;
+        g.beginPath(); g.arc(d.x + Math.sin(sec + d.ph) * 6, d.y, d.r, 0, 6.283); g.fill();
+      }
+    }
+    function run() {
+      cancelAnimationFrame(raf); raf = 0; last = 0;
+      if (lv === 0 || document.hidden) { g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, c.width, c.height); return; }
+      if (reduceMotion) { last = 0; frame(performance.now()); cancelAnimationFrame(raf); raf = 0; return; }
+      raf = requestAnimationFrame(frame);
+    }
+    addEventListener("resize", () => { if (lv) { size(); run(); } });
+    document.addEventListener("visibilitychange", run);
+    return {
+      setLevel(n) { lv = n; size(); run(); },
+      get level() { return lv; },
+    };
+  })();
+
+  // ── 알림(홈 화면에 추가한 앱에서 웹 푸시) ─────────────────────────
+  let pushStarted = false, swReg = null;
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  const pushOK = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  function b64ToBytes(s) {
+    const p = "=".repeat((4 - s.length % 4) % 4);
+    const raw = atob((s + p).replace(/-/g, "+").replace(/_/g, "/"));
+    return Uint8Array.from(raw, ch => ch.charCodeAt(0));
+  }
+  const postJSON = (path, body) => fetch(API + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  function pushMsg(t) { $("push-msg").textContent = t || ""; }
+
+  async function pushInit() {
+    const box = $("push"), body = $("push-body");
+    if (!S || !S.vapid_public) { box.hidden = true; return; }
+    box.hidden = false;
+    if (!pushOK) {
+      body.innerHTML = isIOS && !standalone
+        ? "<p>아이폰은 <b>홈 화면에 추가한 앱</b>에서만 알림을 켤 수 있어요. 사파리 공유 버튼 → ‘홈 화면에 추가’로 연 다음, 여기서 알림을 켜 주세요.</p>"
+        : "<p>이 브라우저는 알림을 지원하지 않아요.</p>";
+      return;
+    }
+    try { swReg = await navigator.serviceWorker.register("sw.js"); } catch (e) { body.innerHTML = "<p>알림 준비에 실패했어요.</p>"; return; }
+    let sub = null;
+    try { sub = await swReg.pushManager.getSubscription(); } catch (e) {}
+    if (sub && Notification.permission === "granted") {
+      postJSON("/subscribe", { subscription: sub.toJSON() }).catch(() => {});   // 서버 쪽 기록이 지워졌어도 다시 맞춘다
+      pushOn();
+    } else {
+      pushOff();
+    }
+  }
+  function pushOff() {
+    const body = $("push-body");
+    const denied = Notification.permission === "denied";
+    body.innerHTML = `<p>밤 10시에 ‘돌릴 시간’, 11시에 ‘아직 안 돌렸어요’를 보내 드려요. 11시 알림은 그 전에 돌렸으면 오지 않아요.</p>
+      <div class="row"><button class="main" id="push-on" type="button"${denied ? " disabled" : ""}>🔔 알림 켜기</button></div>`;
+    if (denied) pushMsg("알림이 막혀 있어요. 아이폰 설정 → 알림 → ‘오늘 밤’에서 허용해 주세요.");
+    $("push-on").addEventListener("click", enablePush);
+  }
+  function pushOn() {
+    $("push-body").innerHTML = `<p>🔔 알림 켜짐 · 밤 10시, 11시(안 돌렸을 때만)</p>
+      <div class="row"><button id="push-test" type="button">시험 알림 보내기</button><button id="push-off" type="button">알림 끄기</button></div>`;
+    $("push-test").addEventListener("click", testPush);
+    $("push-off").addEventListener("click", disablePush);
+  }
+  async function enablePush() {
+    pushMsg("");
+    let perm;
+    try { perm = await Notification.requestPermission(); } catch (e) { perm = "default"; }   // 반드시 누른 직후에 묻는다(iOS)
+    if (perm !== "granted") { pushMsg("알림을 허용해야 받을 수 있어요."); if (perm === "denied") pushOff(); return; }
+    try {
+      swReg = swReg || await navigator.serviceWorker.register("sw.js");
+      await navigator.serviceWorker.ready;
+      const sub = await swReg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(S.vapid_public) });
+      const r = await postJSON("/subscribe", { subscription: sub.toJSON() });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      pushOn();
+      pushMsg("켜졌어요! ‘시험 알림 보내기’로 확인해 보세요.");
+    } catch (e) {
+      pushMsg("알림 등록에 실패했어요. 잠시 뒤 다시 눌러 주세요.");
+    }
+  }
+  async function testPush() {
+    const sub = swReg && await swReg.pushManager.getSubscription();
+    if (!sub) return pushOff();
+    pushMsg("보내는 중…");
+    try {
+      const r = await postJSON("/test", { endpoint: sub.endpoint });
+      pushMsg(r.ok ? "보냈어요. 몇 초 안에 알림이 와야 해요." : r.status === 429 ? "1분에 한 번만 보낼 수 있어요." : r.status === 404 ? "서버에 등록이 없어요. 알림을 껐다 다시 켜 주세요." : "보내지 못했어요.");
+    } catch (e) { pushMsg("서버에 연결하지 못했어요."); }
+  }
+  async function disablePush() {
+    try {
+      const sub = swReg && await swReg.pushManager.getSubscription();
+      if (sub) { postJSON("/unsubscribe", { endpoint: sub.endpoint }).catch(() => {}); await sub.unsubscribe(); }
+    } catch (e) {}
+    pushOff();
+    pushMsg("알림을 껐어요.");
   }
 
   // ── 확률표 ──────────────────────────────────────────────────────

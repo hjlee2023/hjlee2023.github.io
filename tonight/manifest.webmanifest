@@ -1,0 +1,16 @@
+{
+  "name": "오늘 밤 할 것",
+  "short_name": "오늘 밤",
+  "description": "밤 10시부터 새벽 1시까지, 하룻밤에 한 번 돌리는 룰렛",
+  "lang": "ko",
+  "start_url": "/tonight/",
+  "scope": "/tonight/",
+  "display": "standalone",
+  "background_color": "#0d1026",
+  "theme_color": "#0d1026",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
