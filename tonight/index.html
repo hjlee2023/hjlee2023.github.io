@@ -15,8 +15,10 @@
     --muted: #a3a8d6;
     --faint: #6f74a6;
     --card: rgba(30, 34, 78, .72);
+    --panel: rgba(255, 255, 255, .035);
     --line: rgba(255, 255, 255, .09);
     --accent: #ffd166;
+    --second: #b9c0ff;
     --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
   }
   * { box-sizing: border-box; }
@@ -28,6 +30,7 @@
       radial-gradient(900px 520px at 50% -8%, #2b3172 0%, rgba(43, 49, 114, 0) 62%),
       radial-gradient(600px 400px at 90% 110%, #2a1d55 0%, rgba(42, 29, 85, 0) 60%),
       var(--bg);
+    background-attachment: fixed;
     color: var(--ink);
     font-family: var(--font);
     -webkit-font-smoothing: antialiased;
@@ -61,7 +64,7 @@
     gap: 22px;
   }
   header { text-align: center; }
-  .date { color: var(--muted); font-size: 14px; letter-spacing: .02em; margin: 0 0 6px; }
+  .date { color: var(--muted); font-size: 14px; letter-spacing: .02em; margin: 0 0 6px; min-height: 17px; }
   h1 { margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
   h1 .moon { color: var(--accent); }
 
@@ -123,16 +126,26 @@
     background: linear-gradient(180deg, #ffe08a, #ffc23d);
     box-shadow: 0 8px 22px rgba(255, 194, 61, .3), 0 2px 0 rgba(255,255,255,.5) inset;
     cursor: pointer;
-    transition: transform .12s ease, filter .2s ease, opacity .2s ease;
+    transition: transform .12s ease, filter .2s ease, opacity .2s ease, background .3s ease;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
   .spin:hover { filter: brightness(1.05); }
   .spin:active { transform: translateY(1px) scale(.98); }
   .spin:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
-  .spin:disabled { cursor: default; opacity: .55; filter: saturate(.6); transform: none; }
+  .spin:disabled {
+    cursor: default;
+    transform: none;
+    filter: none;
+    color: var(--muted);
+    background: rgba(255,255,255,.07);
+    box-shadow: 0 0 0 1px var(--line) inset;
+    font-size: 16px;
+    padding: 16px 28px;
+  }
+  .spin.busy:disabled { color: #1d1a0b; background: linear-gradient(180deg, #ffe08a, #ffc23d); opacity: .6; font-size: 19px; padding: 16px 44px; }
 
-  .status { min-height: 20px; margin: -8px 0 0; color: var(--muted); font-size: 14px; text-align: center; }
+  .status { min-height: 20px; margin: -8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; text-align: center; }
 
   /* 결과 */
   .results {
@@ -161,9 +174,9 @@
   }
   .card.filled { border-color: rgba(255,255,255,.18); box-shadow: 0 10px 28px rgba(0,0,0,.28); }
   .rank { margin: 0 0 10px; font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
-  .card[data-rank="2"] .rank { color: #b9c0ff; }
+  .card[data-rank="2"] .rank { color: var(--second); }
   .pick { margin: 0; font-size: 19px; font-weight: 800; line-height: 1.3; letter-spacing: -.01em; word-break: keep-all; }
-  .pick .no {
+  .no {
     display: inline-grid;
     place-items: center;
     min-width: 24px; height: 24px;
@@ -184,11 +197,57 @@
 
   .same { margin: -8px 0 0; font-size: 13px; color: var(--muted); text-align: center; min-height: 18px; }
 
+  /* 패널 공통 */
+  .panel {
+    width: 100%;
+    border-radius: 18px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 18px 16px;
+  }
+  .panel h2 { margin: 0 0 14px; font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
+  .panel h3 { margin: 22px 0 10px; font-size: 14px; font-weight: 700; color: var(--muted); }
+  .empty-note { margin: 0; color: var(--faint); font-size: 14px; line-height: 1.6; }
+
+  /* 기록: 요약 숫자 */
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tile { border-radius: 14px; background: rgba(255,255,255,.04); padding: 12px 10px; text-align: center; min-width: 0; }
+  .tile b { display: block; font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .tile b.txt { font-size: 15px; line-height: 1.35; min-height: 29px; display: flex; align-items: center; justify-content: center; word-break: keep-all; }
+  .tile span { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+
+  /* 기록: 항목별 막대 */
+  .legend { display: flex; gap: 14px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .bars { list-style: none; margin: 0; padding: 0; }
+  .bars li { padding: 8px 0; }
+  .bars li + li { border-top: 1px solid var(--line); }
+  .bar-head { display: flex; align-items: baseline; gap: 8px; font-size: 14px; }
+  .bar-head .nm { flex: 1; min-width: 0; }
+  .bar-head .ct { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bar-head .ct b { color: var(--ink); font-weight: 700; }
+  .track { position: relative; height: 8px; margin-top: 6px; border-radius: 99px; background: rgba(255,255,255,.05); overflow: hidden; display: flex; }
+  .track .s1 { background: var(--c); }
+  .track .s2 { background: var(--c); opacity: .42; }
+
+  /* 기록: 지난 기록 */
+  .hist { list-style: none; margin: 0; padding: 0; }
+  .hist li { display: grid; grid-template-columns: 64px 1fr 1fr; gap: 8px; align-items: center; padding: 9px 0; font-size: 14px; }
+  .hist li + li { border-top: 1px solid var(--line); }
+  .hist .d { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .hist .p { min-width: 0; line-height: 1.35; word-break: keep-all; }
+  .hist .no { min-width: 20px; height: 20px; font-size: 11px; margin-right: 5px; vertical-align: 1px; }
+  .more {
+    margin-top: 8px; width: 100%;
+    appearance: none; border: 1px solid var(--line); background: transparent; color: var(--muted);
+    border-radius: 12px; padding: 10px; font: 600 13px var(--font); cursor: pointer;
+  }
+
   /* 확률표 */
   details {
     width: 100%;
     border-radius: 16px;
-    background: rgba(255,255,255,.035);
+    background: var(--panel);
     border: 1px solid var(--line);
     padding: 4px 16px;
   }
@@ -222,6 +281,7 @@
     h1 { font-size: 26px; }
     .pick { font-size: 17px; }
     .card { padding: 14px 12px 16px; }
+    .hist li { grid-template-columns: 56px 1fr 1fr; font-size: 13px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .pop, .pick.waiting { animation: none; }
@@ -231,7 +291,7 @@
 <body>
 <main>
   <header>
-    <p class="date" id="date"></p>
+    <p class="date" id="date">&nbsp;</p>
     <h1><span class="moon">☾</span> 오늘 밤 할 것</h1>
   </header>
 
@@ -246,8 +306,8 @@
     </div>
   </div>
 
-  <button class="spin" id="spin" type="button">돌리기</button>
-  <p class="status" id="status" aria-live="polite">한 번 누르면 두 번 연달아 돌아가요</p>
+  <button class="spin" id="spin" type="button" disabled>불러오는 중…</button>
+  <p class="status" id="status" aria-live="polite"></p>
 
   <section class="results" aria-live="polite">
     <div class="card" data-rank="1" id="card1">
@@ -261,10 +321,16 @@
   </section>
   <p class="same" id="same"></p>
 
+  <section class="panel" id="stats" aria-labelledby="stats-h">
+    <h2 id="stats-h">기록</h2>
+    <div id="stats-body"><p class="empty-note">불러오는 중…</p></div>
+  </section>
+
   <details>
-    <summary>칸별 확률</summary>
+    <summary>규칙과 칸별 확률</summary>
+    <p class="note">오후 10시부터 다음 날 새벽 1시까지 하룻밤에 한 번만 돌릴 수 있어요. 결과는 누르는 순간 서버가 뽑아서 바로 기록하기 때문에, 새로고침하거나 다른 기기에서 열어도 다시 돌릴 수 없어요.</p>
     <ul class="odds" id="odds"></ul>
-    <p class="note">1·2번은 칸이 두 배 넓어서 두 배 자주 나와요. 1순위와 2순위는 따로따로 뽑기 때문에 같은 게 두 번 나올 수도 있어요. 뽑기는 브라우저의 암호용 난수(crypto.getRandomValues)를 씁니다.</p>
+    <p class="note">1·2번은 칸이 두 배 넓어서 두 배 자주 나와요. 1순위와 2순위는 따로따로 뽑기 때문에 같은 게 두 번 나올 수도 있어요. 뽑기는 서버의 암호용 난수(Python secrets)를 씁니다.</p>
   </details>
 </main>
 
@@ -272,7 +338,10 @@
 (() => {
   "use strict";
 
-  // ── 목록 (w = 가중치, 1·2번만 2배) ──────────────────────────────
+  // 기록 서버 (Caddy → 127.0.0.1:8101). 시험할 때만 ?api= 로 바꾼다.
+  const API = new URLSearchParams(location.search).get("api") || "https://api.owndrug.space/tonight/api";
+
+  // ── 목록 (w = 가중치, 1·2번만 2배) — 서버 tonight_server.py 의 ITEMS 와 번호가 같아야 한다 ──
   const ITEMS = [
     { n: 1,  name: "책 읽기 - Hard",      lines: ["책 읽기", "Hard"],   w: 2, c: "#ff8f87" },
     { n: 2,  name: "책 읽기 - Soft",      lines: ["책 읽기", "Soft"],   w: 2, c: "#ffb672" },
@@ -292,20 +361,14 @@
     acc += it.w;
     it.end = acc / TOTAL * 360;
   }
-  // 추첨표: 가중치만큼 번호를 넣은 12장 (1·2번은 2장씩)
-  const TICKETS = ITEMS.flatMap((it, i) => Array(it.w).fill(i));
+  const byN = n => ITEMS.find(it => it.n === n);
+  const idxOfN = n => ITEMS.findIndex(it => it.n === n);
 
-  // ── 난수: 암호용 난수 + 거절 표집(치우침 없음) ────────────────────
+  // 멈출 위치(칸 안의 어디쯤)만 정하는 난수. 결과는 서버가 정한다.
   const buf = new Uint32Array(1);
   function u32() { crypto.getRandomValues(buf); return buf[0]; }
-  function randInt(n) {
-    const limit = Math.floor(0x100000000 / n) * n;
-    let x;
-    do { x = u32(); } while (x >= limit);
-    return x % n;
-  }
+  function randInt(n) { const lim = Math.floor(0x100000000 / n) * n; let x; do { x = u32(); } while (x >= lim); return x % n; }
   function rand01() { return u32() / 0x100000000; }
-  function pickIndex() { return TICKETS[randInt(TICKETS.length)]; }
 
   // ── 그리기 ──────────────────────────────────────────────────────
   const cv = document.getElementById("cv");
@@ -345,14 +408,12 @@
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // 글자: 칸 가운데 각도로 돌려서, 바깥쪽 끝에 맞춤
       const mid = (it.start + it.end) / 2;
       ctx.save();
       ctx.translate(c, c);
       ctx.rotate(rad(mid));
       ctx.textBaseline = "middle";
       ctx.fillStyle = on ? "#15172b" : "rgba(21,23,43,.55)";
-
       ctx.font = `800 ${fs}px ${FONT}`;
       ctx.textAlign = "right";
       const x = R * 0.9;
@@ -364,8 +425,6 @@
         ctx.font = `700 ${fs * 0.92}px ${FONT}`;
         ctx.fillText(it.lines[1], x, lh / 2);
       }
-
-      // 번호: 가운데 원 바로 바깥
       ctx.font = `800 ${fs * 0.86}px ${FONT}`;
       ctx.textAlign = "center";
       ctx.fillStyle = on ? "rgba(21,23,43,.5)" : "rgba(21,23,43,.25)";
@@ -395,19 +454,14 @@
 
   function tick() {
     if (reduceMotion || !pointer.animate) return;
-    pointer.animate(
-      [{ transform: "rotate(-16deg)" }, { transform: "rotate(0deg)" }],
-      { duration: 140, easing: "ease-out" }
-    );
+    pointer.animate([{ transform: "rotate(-16deg)" }, { transform: "rotate(0deg)" }], { duration: 140, easing: "ease-out" });
   }
 
-  // ── 한 번 돌리기: 결과를 먼저 뽑고, 그 칸 안의 임의 지점에 멈춘다 ──
-  function spinOnce(extraTurnsBase, baseDuration) {
+  // 정해진 칸(idx) 안의 임의 지점에 멈추도록 돌린다
+  function spinTo(idx, extraTurnsBase, baseDuration) {
     return new Promise(resolve => {
-      const idx = pickIndex();
       const it = ITEMS[idx];
-      // 칸 경계 바로 위는 피함(양끝 10%)
-      const land = it.start + (it.end - it.start) * (0.1 + 0.8 * rand01());
+      const land = it.start + (it.end - it.start) * (0.1 + 0.8 * rand01());   // 경계 바로 위는 피함
       const from = rot;
       const fromMod = ((from % 360) + 360) % 360;
       const targetMod = (360 - land) % 360;
@@ -418,82 +472,188 @@
       const dur = reduceMotion ? 900 : baseDuration + randInt(700);
       const t0 = performance.now();
       let last = indexAt(from);
-
       function frame(now) {
         const p = Math.min(1, (now - t0) / dur);
-        const e = 1 - Math.pow(1 - p, 4);   // 감속
+        const e = 1 - Math.pow(1 - p, 4);
         rot = from + (to - from) * e;
         cv.style.transform = `rotate(${rot}deg)`;
         const k = indexAt(rot);
         if (k !== last) { last = k; tick(); }
         if (p < 1) requestAnimationFrame(frame);
-        else { rot = to; cv.style.transform = `rotate(${rot}deg)`; resolve(idx); }
+        else { rot = to; cv.style.transform = `rotate(${rot}deg)`; resolve(); }
       }
       requestAnimationFrame(frame);
     });
   }
 
-  // ── 화면 ────────────────────────────────────────────────────────
+  // ── 날짜·시간 도우미 ──────────────────────────────────────────────
   const $ = id => document.getElementById(id);
-  const btn = $("spin"), statusEl = $("status"), sameEl = $("same");
+  const WD = ["일", "월", "화", "수", "목", "금", "토"];
+  const ymd = s => { const [y, m, d] = s.split("-").map(Number); return new Date(Date.UTC(y, m - 1, d)); };
+  const nightLong = s => { const d = ymd(s); return `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일 ${WD[d.getUTCDay()]}요일 밤`; };
+  const nightShort = s => { const d = ymd(s); return `${d.getUTCMonth() + 1}/${d.getUTCDate()} (${WD[d.getUTCDay()]})`; };
+  const prevDay = s => { const d = ymd(s); d.setUTCDate(d.getUTCDate() - 1); return d.toISOString().slice(0, 10); };
+  function left(ms) {
+    const m = Math.max(0, Math.ceil(ms / 60000));
+    if (m >= 60) return `${Math.floor(m / 60)}시간 ${m % 60}분`;
+    return `${m}분`;
+  }
+
+  // ── 상태 ────────────────────────────────────────────────────────
+  const btn = $("spin"), statusEl = $("status"), sameEl = $("same"), dateEl = $("date");
+  let S = null;        // 서버가 준 마지막 상태
+  let skew = 0;        // 서버 시각 - 이 기기 시각
+  let busy = false;    // 돌리는 중엔 화면을 덮어쓰지 않는다
+  let failed = false;
+  const serverNow = () => Date.now() + skew;
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-  function setCard(rank, idx, state) {
+  function setCard(rank, n, mode) {
     const card = $("card" + rank), pick = $("pick" + rank);
     pick.className = "pick";
     card.classList.remove("filled");
     card.style.removeProperty("--chip");
-    if (state === "empty") { pick.classList.add("empty"); pick.textContent = "?"; return; }
-    if (state === "waiting") { pick.classList.add("waiting"); pick.textContent = "돌리는 중…"; return; }
-    const it = ITEMS[idx];
-    card.style.setProperty("--chip", it.c);
+    if (mode === "empty") { pick.classList.add("empty"); pick.textContent = "?"; return; }
+    if (mode === "waiting") { pick.classList.add("waiting"); pick.textContent = "돌리는 중…"; return; }
+    const it = byN(n);
+    const color = it ? it.c : "#888";
+    card.style.setProperty("--chip", color);
     card.classList.add("filled");
-    pick.innerHTML = "";
-    const no = document.createElement("span");
-    no.className = "no";
-    no.textContent = it.n;
-    pick.append(no, document.createTextNode(it.name));
-    if (state === "new") { pick.classList.add("pop"); }
+    pick.replaceChildren(chip(n, color), document.createTextNode(it ? it.name : `${n}번`));
+    if (mode === "new") pick.classList.add("pop");
+  }
+  function chip(n, color) {
+    const s = document.createElement("span");
+    s.className = "no";
+    s.style.setProperty("--chip", color);
+    s.textContent = n;
+    return s;
   }
 
-  function showSame(a, b) {
-    sameEl.textContent = (a === b) ? "1순위와 2순위가 같은 게 나왔어요" : "";
+  function focusRecord() {
+    if (!S) return null;
+    const key = S.open ? S.night : S.recent_night;
+    return S.spins.find(r => r.night === key) || null;
   }
 
-  const STORE = "tonight-roulette:last";
-  function save(a, b) {
-    try { localStorage.setItem(STORE, JSON.stringify({ t: Date.now(), a, b })); } catch (e) {}
-  }
-  function restore() {
-    try {
-      const v = JSON.parse(localStorage.getItem(STORE) || "null");
-      if (!v || typeof v.a !== "number" || typeof v.b !== "number") return;
-      if (!ITEMS[v.a] || !ITEMS[v.b]) return;
-      if (Date.now() - v.t > 18 * 3600 * 1000) return;
-      setCard(1, v.a, "shown");
-      setCard(2, v.b, "shown");
-      showSame(v.a, v.b);
-      const hm = new Date(v.t).toLocaleTimeString("ko-KR", { hour: "numeric", minute: "2-digit" });
-      statusEl.textContent = `지난번 결과 (${hm}) · 다시 돌려도 돼요`;
-      btn.textContent = "다시 돌리기";
-    } catch (e) {}
+  function render() {
+    if (!S) return;
+    renderStats();
+    if (busy) return;
+    const rec = focusRecord();
+    if (rec) {
+      setCard(1, rec.first.n, "shown");
+      setCard(2, rec.second.n, "shown");
+      sameEl.textContent = rec.first.n === rec.second.n ? "1순위와 2순위가 같은 게 나왔어요" : "";
+    } else {
+      setCard(1, 0, "empty");
+      setCard(2, 0, "empty");
+      sameEl.textContent = "";
+    }
+    btn.classList.remove("busy");
+    if (S.open) {
+      dateEl.textContent = nightLong(S.night);
+      btn.disabled = !!rec;
+      btn.textContent = rec ? "오늘 밤은 이미 돌렸어요" : "돌리기";
+    } else {
+      // 시간 밖: 지난밤 결과가 있으면 그걸, 없으면 오늘 밤 날짜를 보여 준다
+      dateEl.textContent = rec ? nightLong(S.recent_night) : nightLong(S.opens_at.slice(0, 10));
+      btn.disabled = true;
+      btn.textContent = "오후 10시에 열려요";
+    }
+    updateClock();
   }
 
-  let busy = false;
+  // 남은 시간 문구 + 시간창 경계를 넘으면 서버 상태를 다시 받는다
+  function updateClock() {
+    if (!S || busy || failed) return;
+    const now = serverNow();
+    const rec = focusRecord();
+    if (S.open) {
+      const until = Date.parse(S.closes_at) - now;
+      if (until <= 0) return refresh();
+      statusEl.textContent = rec
+        ? "다음 판은 내일 밤 10시에 열려요"
+        : `한 번 누르면 두 번 연달아 돌아가요 · 새벽 1시 마감 (${left(until)} 남음)`;
+    } else {
+      const until = Date.parse(S.opens_at) - now;
+      if (until <= 0) return refresh();
+      statusEl.textContent = rec
+        ? `지난밤 결과예요 · 다음 판은 ${left(until)} 뒤 (오후 10시)`
+        : `오후 10시부터 새벽 1시까지 돌릴 수 있어요 · ${left(until)} 남음`;
+    }
+  }
+
+  let refreshing = null;
+  function refresh() {
+    if (refreshing) return refreshing;
+    refreshing = (async () => {
+      try {
+        const r = await fetch(API + "/state", { cache: "no-store" });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        apply(await r.json());
+        failed = false;
+      } catch (e) {
+        showFail();
+      } finally {
+        refreshing = null;
+      }
+    })();
+    return refreshing;
+  }
+  function apply(state) {
+    S = state;
+    skew = Date.parse(state.now) - Date.now();
+    render();
+  }
+  function showFail() {
+    failed = true;
+    if (busy) return;
+    btn.classList.remove("busy");
+    btn.disabled = false;
+    btn.textContent = "다시 불러오기";
+    statusEl.textContent = "기록 서버에 연결하지 못했어요. 잠시 뒤 다시 눌러 주세요";
+  }
+
+  // ── 돌리기: 서버가 1·2순위를 뽑아 기록하고, 화면은 그 결과로 돌아간다 ──
   async function go() {
     if (busy) return;
+    if (failed || !S) { btn.disabled = true; btn.textContent = "불러오는 중…"; return refresh(); }
     busy = true;
     btn.disabled = true;
+    btn.classList.add("busy");
     btn.textContent = "돌리는 중…";
+    statusEl.textContent = "뽑는 중…";
+
+    let res, body;
+    try {
+      res = await fetch(API + "/spin", { method: "POST", cache: "no-store" });
+      body = await res.json();
+    } catch (e) {
+      busy = false;
+      showFail();
+      return;
+    }
+    if (res.status !== 200) {
+      busy = false;
+      if (body && body.state) apply(body.state);
+      if (res.status === 409) statusEl.textContent = "오늘 밤은 이미 돌렸어요 (다른 화면에서 돌린 결과예요)";
+      else if (res.status !== 403) showFail();
+      return;
+    }
+
+    const rec = body.record;
+    S = body.state;
+    skew = Date.parse(S.now) - Date.now();
     sameEl.textContent = "";
     highlight = -1; draw();
     setCard(1, 0, "waiting");
     setCard(2, 0, "empty");
 
     statusEl.textContent = "1순위 뽑는 중…";
-    const a = await spinOnce(6, 4200);
-    highlight = a; draw();
-    setCard(1, a, "new");
+    await spinTo(idxOfN(rec.first.n), 6, 4200);
+    highlight = idxOfN(rec.first.n); draw();
+    setCard(1, rec.first.n, "new");
     if (navigator.vibrate) navigator.vibrate(25);
 
     statusEl.textContent = "1순위 나왔어요. 곧 2순위를 돌려요";
@@ -502,25 +662,88 @@
     highlight = -1; draw();
     setCard(2, 0, "waiting");
     statusEl.textContent = "2순위 뽑는 중…";
-    const b = await spinOnce(5, 3800);
-    highlight = b; draw();
-    setCard(2, b, "new");
+    await spinTo(idxOfN(rec.second.n), 5, 3800);
+    highlight = idxOfN(rec.second.n); draw();
+    setCard(2, rec.second.n, "new");
     if (navigator.vibrate) navigator.vibrate([25, 60, 25]);
 
-    showSame(a, b);
-    statusEl.textContent = "오늘 밤은 이걸로!";
-    save(a, b);
-    btn.textContent = "다시 돌리기";
-    btn.disabled = false;
+    sameEl.textContent = rec.first.n === rec.second.n ? "1순위와 2순위가 같은 게 나왔어요" : "";
     busy = false;
+    btn.classList.remove("busy");
+    btn.textContent = "오늘 밤은 이걸로!";
+    statusEl.textContent = "기록했어요 · 다음 판은 내일 밤 10시";
+    renderStats();
   }
-
   btn.addEventListener("click", go);
 
-  // 날짜
-  $("date").textContent = new Date().toLocaleDateString("ko-KR", { month: "long", day: "numeric", weekday: "long" }) + " 밤";
+  // ── 기록·통계 ───────────────────────────────────────────────────
+  let showAll = false;
+  function renderStats() {
+    const box = $("stats-body");
+    const spins = (S && S.spins) || [];
+    if (!spins.length) {
+      box.innerHTML = '<p class="empty-note">아직 기록이 없어요. 오후 10시부터 새벽 1시 사이에 첫 판을 돌려 보세요.</p>';
+      return;
+    }
+    // 돌리는 중이면 방금 뽑은 기록은 아직 숨긴다(결과가 먼저 보이지 않게)
+    const rows = busy && S.open ? spins.filter(r => r.night !== S.night) : spins.slice();
+    const nights = rows.length;
 
-  // 확률표
+    // 연속: 가장 최근 밤부터 거꾸로, 빠진 밤이 나올 때까지
+    const have = new Set(rows.map(r => r.night));
+    let anchor = S.open ? S.night : S.recent_night;
+    if (S.open && !have.has(anchor)) anchor = prevDay(anchor);  // 오늘 밤 아직 안 돌렸으면 어젯밤부터
+    let streak = 0;
+    while (have.has(anchor)) { streak++; anchor = prevDay(anchor); }
+
+    const c1 = {}, c2 = {};
+    for (const r of rows) {
+      c1[r.first.n] = (c1[r.first.n] || 0) + 1;
+      c2[r.second.n] = (c2[r.second.n] || 0) + 1;
+    }
+    const tot = n => (c1[n] || 0) + (c2[n] || 0);
+    const maxTot = Math.max(1, ...ITEMS.map(it => tot(it.n)));
+    const best = Math.max(...ITEMS.map(it => tot(it.n)));
+    const tops = ITEMS.filter(it => best > 0 && tot(it.n) === best);
+
+    const esc = s => String(s).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+    let h = '<div class="tiles">';
+    h += `<div class="tile"><b>${nights}</b><span>돌린 밤</span></div>`;
+    h += `<div class="tile"><b>${streak}</b><span>연속(밤)</span></div>`;
+    h += `<div class="tile"><b class="txt">${tops.length === 1 ? esc(tops[0].name) : tops.length ? `${tops.length}개 동률` : "-"}</b><span>가장 많이 나온 것</span></div>`;
+    h += "</div>";
+
+    h += `<h3>항목별 (1·2순위 합 ${nights * 2}번)</h3>`;
+    h += '<p class="legend"><span><i style="background:var(--ink)"></i>1순위</span><span><i style="background:var(--ink);opacity:.42"></i>2순위</span></p>';
+    h += '<ul class="bars">';
+    for (const it of ITEMS) {
+      const a = c1[it.n] || 0, b = c2[it.n] || 0;
+      const pct = Math.round((a + b) / (nights * 2) * 100);
+      h += `<li><div class="bar-head"><span class="nm">${it.n}. ${esc(it.name)}</span>`
+        + `<span class="ct"><b>${a + b}</b>번 · ${pct}% <span style="color:var(--faint)">(1순위 ${a} · 2순위 ${b})</span></span></div>`
+        + `<div class="track" style="--c:${it.c}"><span class="s1" style="width:${a / maxTot * 100}%"></span><span class="s2" style="width:${b / maxTot * 100}%"></span></div></li>`;
+    }
+    h += "</ul>";
+
+    h += "<h3>지난 기록</h3>";
+    const list = rows.slice().sort((x, y) => (x.night < y.night ? 1 : -1));
+    const shown = showAll ? list : list.slice(0, 7);
+    h += '<ul class="hist">';
+    for (const r of shown) {
+      const cell = p => {
+        const it = byN(p.n);
+        return `<span class="p"><span class="no" style="--chip:${it ? it.c : "#888"}">${p.n}</span>${esc(p.name)}</span>`;
+      };
+      h += `<li><span class="d">${nightShort(r.night)}</span>${cell(r.first)}${cell(r.second)}</li>`;
+    }
+    h += "</ul>";
+    if (list.length > 7) h += `<button class="more" id="more" type="button">${showAll ? "최근 7개만 보기" : `전체 보기 (${list.length})`}</button>`;
+    box.innerHTML = h;
+    const more = $("more");
+    if (more) more.addEventListener("click", () => { showAll = !showAll; renderStats(); });
+  }
+
+  // ── 확률표 ──────────────────────────────────────────────────────
   const odds = $("odds");
   for (const it of ITEMS) {
     const li = document.createElement("li");
@@ -533,7 +756,8 @@
     odds.append(li);
   }
 
-  // 그리기 시작 (웹폰트 글자 모음을 먼저 불러온 뒤 다시 그림)
+  // ── 시작 ────────────────────────────────────────────────────────
+  try { localStorage.removeItem("tonight-roulette:last"); } catch (e) {}   // 예전 판(기기 저장)의 흔적
   draw();
   const glyphs = ITEMS.map(it => it.lines.join("") + it.n).join("");
   if (document.fonts && document.fonts.load) {
@@ -542,11 +766,11 @@
   }
   let rz;
   addEventListener("resize", () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(draw); });
+  setInterval(updateClock, 1000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && !busy) refresh(); });
+  refresh();
 
-  restore();
-
-  // 확인용(콘솔): __roulette.pick(), __roulette.indexAt(rot)
-  window.__roulette = { pickIndex, indexAt, ITEMS, get rot() { return rot; } };
+  window.__roulette = { ITEMS, indexAt, get rot() { return rot; }, get state() { return S; } };
 })();
 </script>
 </body>
