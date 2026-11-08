@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d1026">
+<title>오늘 밤 할 것</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --bg: #0d1026;
+    --ink: #eef0ff;
+    --muted: #a3a8d6;
+    --faint: #6f74a6;
+    --card: rgba(30, 34, 78, .72);
+    --line: rgba(255, 255, 255, .09);
+    --accent: #ffd166;
+    --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+      radial-gradient(900px 520px at 50% -8%, #2b3172 0%, rgba(43, 49, 114, 0) 62%),
+      radial-gradient(600px 400px at 90% 110%, #2a1d55 0%, rgba(42, 29, 85, 0) 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  /* 별 */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 18%, rgba(255,255,255,.85), transparent 60%),
+      radial-gradient(1px 1px at 27% 8%, rgba(255,255,255,.6), transparent 60%),
+      radial-gradient(1.6px 1.6px at 81% 14%, rgba(255,255,255,.8), transparent 60%),
+      radial-gradient(1px 1px at 66% 26%, rgba(255,255,255,.5), transparent 60%),
+      radial-gradient(1.2px 1.2px at 92% 42%, rgba(255,255,255,.6), transparent 60%),
+      radial-gradient(1px 1px at 6% 52%, rgba(255,255,255,.55), transparent 60%),
+      radial-gradient(1.3px 1.3px at 18% 78%, rgba(255,255,255,.5), transparent 60%),
+      radial-gradient(1px 1px at 74% 88%, rgba(255,255,255,.45), transparent 60%),
+      radial-gradient(1.2px 1.2px at 44% 4%, rgba(255,255,255,.7), transparent 60%),
+      radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,.35), transparent 60%);
+  }
+  main {
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: max(28px, env(safe-area-inset-top)) 16px max(40px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+  header { text-align: center; }
+  .date { color: var(--muted); font-size: 14px; letter-spacing: .02em; margin: 0 0 6px; }
+  h1 { margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+  h1 .moon { color: var(--accent); }
+
+  /* 룰렛 */
+  .wheel {
+    position: relative;
+    width: min(88vw, 420px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 10px;
+    background: linear-gradient(150deg, #343a86, #151838 70%);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.12) inset,
+      0 22px 60px rgba(0,0,0,.55),
+      0 0 90px rgba(120,130,255,.18);
+    margin-top: 6px;
+  }
+  .wheel canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    will-change: transform;
+  }
+  .pointer {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    width: 34px;
+    height: 44px;
+    margin-left: -17px;
+    transform-origin: 50% 30%;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,.5));
+    z-index: 2;
+  }
+  .hub {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 21%; height: 21%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #2a2f6e, #10132e 75%);
+    box-shadow: 0 0 0 3px rgba(255,255,255,.9), 0 6px 18px rgba(0,0,0,.5);
+    display: grid;
+    place-items: center;
+    z-index: 1;
+  }
+  .hub svg { width: 46%; height: 46%; }
+
+  /* 버튼 */
+  .spin {
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    padding: 16px 44px;
+    font: 800 19px/1 var(--font);
+    letter-spacing: .02em;
+    color: #1d1a0b;
+    background: linear-gradient(180deg, #ffe08a, #ffc23d);
+    box-shadow: 0 8px 22px rgba(255, 194, 61, .3), 0 2px 0 rgba(255,255,255,.5) inset;
+    cursor: pointer;
+    transition: transform .12s ease, filter .2s ease, opacity .2s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .spin:hover { filter: brightness(1.05); }
+  .spin:active { transform: translateY(1px) scale(.98); }
+  .spin:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .spin:disabled { cursor: default; opacity: .55; filter: saturate(.6); transform: none; }
+
+  .status { min-height: 20px; margin: -8px 0 0; color: var(--muted); font-size: 14px; text-align: center; }
+
+  /* 결과 */
+  .results {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    padding: 16px 16px 18px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    min-height: 112px;
+    backdrop-filter: blur(6px);
+    transition: border-color .3s ease, box-shadow .3s ease;
+  }
+  .card::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: var(--chip, transparent);
+    transition: background .3s ease;
+  }
+  .card.filled { border-color: rgba(255,255,255,.18); box-shadow: 0 10px 28px rgba(0,0,0,.28); }
+  .rank { margin: 0 0 10px; font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
+  .card[data-rank="2"] .rank { color: #b9c0ff; }
+  .pick { margin: 0; font-size: 19px; font-weight: 800; line-height: 1.3; letter-spacing: -.01em; word-break: keep-all; }
+  .pick .no {
+    display: inline-grid;
+    place-items: center;
+    min-width: 24px; height: 24px;
+    padding: 0 6px;
+    margin-right: 6px;
+    border-radius: 999px;
+    background: var(--chip, #444);
+    color: #15172b;
+    font-size: 13px;
+    font-weight: 800;
+    vertical-align: 2px;
+  }
+  .pick.empty { color: var(--faint); font-weight: 700; }
+  .pick.waiting { color: var(--muted); animation: breathe 1s ease-in-out infinite; }
+  @keyframes breathe { 50% { opacity: .35; } }
+  .pop { animation: pop .45s cubic-bezier(.2, 1.4, .4, 1); }
+  @keyframes pop { 0% { transform: scale(.85); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+  .same { margin: -8px 0 0; font-size: 13px; color: var(--muted); text-align: center; min-height: 18px; }
+
+  /* 확률표 */
+  details {
+    width: 100%;
+    border-radius: 16px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid var(--line);
+    padding: 4px 16px;
+  }
+  summary {
+    cursor: pointer;
+    padding: 12px 0;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "＋"; float: right; color: var(--faint); }
+  details[open] summary::after { content: "－"; }
+  .odds { list-style: none; margin: 0 0 8px; padding: 0; }
+  .odds li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .odds .dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+  .odds .nm { flex: 1; }
+  .odds .pc { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 14px; }
+  .odds li.double .pc { color: var(--accent); font-weight: 700; }
+  .note { margin: 4px 0 12px; color: var(--faint); font-size: 13px; line-height: 1.6; }
+
+  @media (max-width: 360px) {
+    h1 { font-size: 26px; }
+    .pick { font-size: 17px; }
+    .card { padding: 14px 12px 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pop, .pick.waiting { animation: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="date" id="date"></p>
+    <h1><span class="moon">☾</span> 오늘 밤 할 것</h1>
+  </header>
+
+  <div class="wheel" id="wheel">
+    <svg class="pointer" id="pointer" viewBox="0 0 34 44" aria-hidden="true">
+      <path d="M17 43 C 12 34, 2 24, 2 15 A 15 15 0 0 1 32 15 C 32 24, 22 34, 17 43 Z" fill="#ffd166" stroke="#fff6d6" stroke-width="2"/>
+      <circle cx="17" cy="15" r="5" fill="#1d1a0b" opacity=".75"/>
+    </svg>
+    <canvas id="cv" role="img" aria-label="오늘 밤 할 것 룰렛"></canvas>
+    <div class="hub" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M15.5 3.2a8.8 8.8 0 1 0 5.3 12.9A7.2 7.2 0 0 1 15.5 3.2Z" fill="#ffd166"/></svg>
+    </div>
+  </div>
+
+  <button class="spin" id="spin" type="button">돌리기</button>
+  <p class="status" id="status" aria-live="polite">한 번 누르면 두 번 연달아 돌아가요</p>
+
+  <section class="results" aria-live="polite">
+    <div class="card" data-rank="1" id="card1">
+      <p class="rank">1순위</p>
+      <p class="pick empty" id="pick1">?</p>
+    </div>
+    <div class="card" data-rank="2" id="card2">
+      <p class="rank">2순위</p>
+      <p class="pick empty" id="pick2">?</p>
+    </div>
+  </section>
+  <p class="same" id="same"></p>
+
+  <details>
+    <summary>칸별 확률</summary>
+    <ul class="odds" id="odds"></ul>
+    <p class="note">1·2번은 칸이 두 배 넓어서 두 배 자주 나와요. 1순위와 2순위는 따로따로 뽑기 때문에 같은 게 두 번 나올 수도 있어요. 뽑기는 브라우저의 암호용 난수(crypto.getRandomValues)를 씁니다.</p>
+  </details>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  // ── 목록 (w = 가중치, 1·2번만 2배) ──────────────────────────────
+  const ITEMS = [
+    { n: 1,  name: "책 읽기 - Hard",      lines: ["책 읽기", "Hard"],   w: 2, c: "#ff8f87" },
+    { n: 2,  name: "책 읽기 - Soft",      lines: ["책 읽기", "Soft"],   w: 2, c: "#ffb672" },
+    { n: 3,  name: "청소하기",            lines: ["청소하기"],          w: 1, c: "#ffdc6b" },
+    { n: 4,  name: "목 스트레칭 & 명상",  lines: ["목 스트레칭", "& 명상"], w: 1, c: "#a6e37e" },
+    { n: 5,  name: "이두 & 삼두 운동",    lines: ["이두 & 삼두", "운동"], w: 1, c: "#5fdcb4" },
+    { n: 6,  name: "푸시업",              lines: ["푸시업"],            w: 1, c: "#62c6f2" },
+    { n: 7,  name: "풀업",                lines: ["풀업"],              w: 1, c: "#7fa2ff" },
+    { n: 8,  name: "사레레",              lines: ["사레레"],            w: 1, c: "#a594ff" },
+    { n: 9,  name: "스쿼트",              lines: ["스쿼트"],            w: 1, c: "#d891f5" },
+    { n: 10, name: "불스스!",             lines: ["불스스!"],           w: 1, c: "#ff8fc4" },
+  ];
+  const TOTAL = ITEMS.reduce((s, it) => s + it.w, 0); // 12
+  let acc = 0;
+  for (const it of ITEMS) {
+    it.start = acc / TOTAL * 360;   // 위쪽(12시)부터 시계 방향, 도
+    acc += it.w;
+    it.end = acc / TOTAL * 360;
+  }
+  // 추첨표: 가중치만큼 번호를 넣은 12장 (1·2번은 2장씩)
+  const TICKETS = ITEMS.flatMap((it, i) => Array(it.w).fill(i));
+
+  // ── 난수: 암호용 난수 + 거절 표집(치우침 없음) ────────────────────
+  const buf = new Uint32Array(1);
+  function u32() { crypto.getRandomValues(buf); return buf[0]; }
+  function randInt(n) {
+    const limit = Math.floor(0x100000000 / n) * n;
+    let x;
+    do { x = u32(); } while (x >= limit);
+    return x % n;
+  }
+  function rand01() { return u32() / 0x100000000; }
+  function pickIndex() { return TICKETS[randInt(TICKETS.length)]; }
+
+  // ── 그리기 ──────────────────────────────────────────────────────
+  const cv = document.getElementById("cv");
+  const ctx = cv.getContext("2d");
+  const pointer = document.getElementById("pointer");
+  const FONT = getComputedStyle(document.documentElement).getPropertyValue("--font");
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let rot = 0;          // 현재 회전각(도, 누적)
+  let highlight = -1;   // 강조할 칸
+
+  const rad = d => (d - 90) * Math.PI / 180;
+
+  function draw() {
+    const size = cv.offsetWidth;            // transform 영향 없는 레이아웃 크기
+    if (!size) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
+    if (cv.width !== Math.round(size * dpr)) {
+      cv.width = Math.round(size * dpr);
+      cv.height = Math.round(size * dpr);
+    }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, size, size);
+    const c = size / 2, R = size / 2;
+    const fs = Math.max(11, R * 0.082);
+
+    ITEMS.forEach((it, i) => {
+      const on = highlight < 0 || highlight === i;
+      ctx.beginPath();
+      ctx.moveTo(c, c);
+      ctx.arc(c, c, R, rad(it.start), rad(it.end));
+      ctx.closePath();
+      ctx.fillStyle = it.c;
+      ctx.globalAlpha = on ? 1 : 0.22;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = "#11142f";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // 글자: 칸 가운데 각도로 돌려서, 바깥쪽 끝에 맞춤
+      const mid = (it.start + it.end) / 2;
+      ctx.save();
+      ctx.translate(c, c);
+      ctx.rotate(rad(mid));
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = on ? "#15172b" : "rgba(21,23,43,.55)";
+
+      ctx.font = `800 ${fs}px ${FONT}`;
+      ctx.textAlign = "right";
+      const x = R * 0.9;
+      const lh = fs * 1.18;
+      if (it.lines.length === 1) {
+        ctx.fillText(it.lines[0], x, 0);
+      } else {
+        ctx.fillText(it.lines[0], x, -lh / 2);
+        ctx.font = `700 ${fs * 0.92}px ${FONT}`;
+        ctx.fillText(it.lines[1], x, lh / 2);
+      }
+
+      // 번호: 가운데 원 바로 바깥
+      ctx.font = `800 ${fs * 0.86}px ${FONT}`;
+      ctx.textAlign = "center";
+      ctx.fillStyle = on ? "rgba(21,23,43,.5)" : "rgba(21,23,43,.25)";
+      ctx.fillText(String(it.n), R * 0.34, 0);
+      ctx.restore();
+    });
+
+    if (highlight >= 0) {
+      const it = ITEMS[highlight];
+      ctx.beginPath();
+      ctx.moveTo(c, c);
+      ctx.arc(c, c, R - 2, rad(it.start), rad(it.end));
+      ctx.closePath();
+      ctx.strokeStyle = "#ffffff";
+      ctx.lineWidth = 4;
+      ctx.lineJoin = "round";
+      ctx.stroke();
+    }
+  }
+
+  // 지금 바늘(12시) 아래 있는 칸
+  function indexAt(r) {
+    const a = ((-r % 360) + 360) % 360;
+    for (let i = 0; i < ITEMS.length; i++) if (a >= ITEMS[i].start && a < ITEMS[i].end) return i;
+    return ITEMS.length - 1;
+  }
+
+  function tick() {
+    if (reduceMotion || !pointer.animate) return;
+    pointer.animate(
+      [{ transform: "rotate(-16deg)" }, { transform: "rotate(0deg)" }],
+      { duration: 140, easing: "ease-out" }
+    );
+  }
+
+  // ── 한 번 돌리기: 결과를 먼저 뽑고, 그 칸 안의 임의 지점에 멈춘다 ──
+  function spinOnce(extraTurnsBase, baseDuration) {
+    return new Promise(resolve => {
+      const idx = pickIndex();
+      const it = ITEMS[idx];
+      // 칸 경계 바로 위는 피함(양끝 10%)
+      const land = it.start + (it.end - it.start) * (0.1 + 0.8 * rand01());
+      const from = rot;
+      const fromMod = ((from % 360) + 360) % 360;
+      const targetMod = (360 - land) % 360;
+      let delta = targetMod - fromMod;
+      if (delta < 0) delta += 360;
+      const turns = reduceMotion ? 1 : extraTurnsBase + randInt(3);
+      const to = from + turns * 360 + delta;
+      const dur = reduceMotion ? 900 : baseDuration + randInt(700);
+      const t0 = performance.now();
+      let last = indexAt(from);
+
+      function frame(now) {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = 1 - Math.pow(1 - p, 4);   // 감속
+        rot = from + (to - from) * e;
+        cv.style.transform = `rotate(${rot}deg)`;
+        const k = indexAt(rot);
+        if (k !== last) { last = k; tick(); }
+        if (p < 1) requestAnimationFrame(frame);
+        else { rot = to; cv.style.transform = `rotate(${rot}deg)`; resolve(idx); }
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
+  // ── 화면 ────────────────────────────────────────────────────────
+  const $ = id => document.getElementById(id);
+  const btn = $("spin"), statusEl = $("status"), sameEl = $("same");
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  function setCard(rank, idx, state) {
+    const card = $("card" + rank), pick = $("pick" + rank);
+    pick.className = "pick";
+    card.classList.remove("filled");
+    card.style.removeProperty("--chip");
+    if (state === "empty") { pick.classList.add("empty"); pick.textContent = "?"; return; }
+    if (state === "waiting") { pick.classList.add("waiting"); pick.textContent = "돌리는 중…"; return; }
+    const it = ITEMS[idx];
+    card.style.setProperty("--chip", it.c);
+    card.classList.add("filled");
+    pick.innerHTML = "";
+    const no = document.createElement("span");
+    no.className = "no";
+    no.textContent = it.n;
+    pick.append(no, document.createTextNode(it.name));
+    if (state === "new") { pick.classList.add("pop"); }
+  }
+
+  function showSame(a, b) {
+    sameEl.textContent = (a === b) ? "1순위와 2순위가 같은 게 나왔어요" : "";
+  }
+
+  const STORE = "tonight-roulette:last";
+  function save(a, b) {
+    try { localStorage.setItem(STORE, JSON.stringify({ t: Date.now(), a, b })); } catch (e) {}
+  }
+  function restore() {
+    try {
+      const v = JSON.parse(localStorage.getItem(STORE) || "null");
+      if (!v || typeof v.a !== "number" || typeof v.b !== "number") return;
+      if (!ITEMS[v.a] || !ITEMS[v.b]) return;
+      if (Date.now() - v.t > 18 * 3600 * 1000) return;
+      setCard(1, v.a, "shown");
+      setCard(2, v.b, "shown");
+      showSame(v.a, v.b);
+      const hm = new Date(v.t).toLocaleTimeString("ko-KR", { hour: "numeric", minute: "2-digit" });
+      statusEl.textContent = `지난번 결과 (${hm}) · 다시 돌려도 돼요`;
+      btn.textContent = "다시 돌리기";
+    } catch (e) {}
+  }
+
+  let busy = false;
+  async function go() {
+    if (busy) return;
+    busy = true;
+    btn.disabled = true;
+    btn.textContent = "돌리는 중…";
+    sameEl.textContent = "";
+    highlight = -1; draw();
+    setCard(1, 0, "waiting");
+    setCard(2, 0, "empty");
+
+    statusEl.textContent = "1순위 뽑는 중…";
+    const a = await spinOnce(6, 4200);
+    highlight = a; draw();
+    setCard(1, a, "new");
+    if (navigator.vibrate) navigator.vibrate(25);
+
+    statusEl.textContent = "1순위 나왔어요. 곧 2순위를 돌려요";
+    await sleep(reduceMotion ? 500 : 1300);
+
+    highlight = -1; draw();
+    setCard(2, 0, "waiting");
+    statusEl.textContent = "2순위 뽑는 중…";
+    const b = await spinOnce(5, 3800);
+    highlight = b; draw();
+    setCard(2, b, "new");
+    if (navigator.vibrate) navigator.vibrate([25, 60, 25]);
+
+    showSame(a, b);
+    statusEl.textContent = "오늘 밤은 이걸로!";
+    save(a, b);
+    btn.textContent = "다시 돌리기";
+    btn.disabled = false;
+    busy = false;
+  }
+
+  btn.addEventListener("click", go);
+
+  // 날짜
+  $("date").textContent = new Date().toLocaleDateString("ko-KR", { month: "long", day: "numeric", weekday: "long" }) + " 밤";
+
+  // 확률표
+  const odds = $("odds");
+  for (const it of ITEMS) {
+    const li = document.createElement("li");
+    if (it.w > 1) li.className = "double";
+    const dot = document.createElement("span"); dot.className = "dot"; dot.style.background = it.c;
+    const nm = document.createElement("span"); nm.className = "nm"; nm.textContent = `${it.n}. ${it.name}`;
+    const pc = document.createElement("span"); pc.className = "pc";
+    pc.textContent = `${it.w}/${TOTAL} · ${(it.w / TOTAL * 100).toFixed(1)}%`;
+    li.append(dot, nm, pc);
+    odds.append(li);
+  }
+
+  // 그리기 시작 (웹폰트 글자 모음을 먼저 불러온 뒤 다시 그림)
+  draw();
+  const glyphs = ITEMS.map(it => it.lines.join("") + it.n).join("");
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load(`800 16px "Pretendard Variable"`, glyphs).then(draw, () => {});
+    document.fonts.ready.then(draw);
+  }
+  let rz;
+  addEventListener("resize", () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(draw); });
+
+  restore();
+
+  // 확인용(콘솔): __roulette.pick(), __roulette.indexAt(rot)
+  window.__roulette = { pickIndex, indexAt, ITEMS, get rot() { return rot; } };
+})();
+</script>
+</body>
+</html>
